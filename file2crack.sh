@@ -51,7 +51,7 @@ while true; do
 	n=0
 
 	# menampilkan waktu saat ini dan menu
-	echo -e "${p}[${h}${waktu}${p}] [${c}Ekstrak Hash File${p}]${r}"
+	echo -e "${p}[${h}${waktu}${p}] [${c}file2crack${p}]${r}"
 	echo ""
 	echo -e "${k}Daftar menu yang tersedia:${r}"
 	echo ""
