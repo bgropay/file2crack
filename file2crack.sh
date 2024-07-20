@@ -1,10 +1,10 @@
 #!/bin/bash
 #--------------------------------------------------
-# EHF (Ekstrak Hash File)
+# file2crack
 #
-# EHF adalah sebuah program bash sederhana yang dirancang
-# untuk mengekstrak hash file ZIP, RAR, 7z, PDF, Office
-# (docx, xlsx, pptx)
+# file2crack adalah sebuah program bash sederhana yang 
+# dirancang untuk mengekstrak hash file ZIP, RAR, 7z, 
+# PDF, Office (docx, xlsx, pptx).
 #
 # Dibuat oleh bgropay
 #--------------------------------------------------
