@@ -28,6 +28,13 @@ h="\e[1;32m" # warna hijau
 b="\e[1;34m" # warna biru
 k="\e[1;33m" # warna kuning
 
+# folder untuk menyimpan file hash
+path="file_hash"
+
+if [[ ! -d "${path}" ]]; then
+        mkdir -p "${path}"
+fi
+
 # daftar menu yang tersedia
 daftar_menu=(
 	"Keluar"
@@ -103,7 +110,7 @@ while true; do
 			echo -e "${b}[*] ${p}Mengekstrak hash file ZIP '${nama_file_zip}' ke format John ...${r}"
 			sleep 3
 			hash_file_zip_john=$(zip2john "${nama_file_zip}" 2>/dev/null)
-			nama_file_hash_file_zip_john="${nama_file_zip}.john"
+			nama_file_hash_file_zip_john="${path}/${nama_file_zip}.john"
 			echo "${hash_file_zip_john}" > "${nama_file_hash_file_zip_john}"
 
 			# kondisi jika isi file hash file zip john kosong
@@ -119,7 +126,7 @@ while true; do
 			echo -e "${b}[*] ${p}Mengekstrak hash file ZIP '${nama_file_zip}' ke format Hashcat${i}${r}"
 			sleep 3
 			hash_file_zip_hashcat=$(zip2john "${nama_file_zip}" 2>/dev/null | cut -d ":" -f 2 | tr -d "[:space:]")
-			nama_file_hash_file_zip_hashcat="${nama_file_zip}.hashcat"
+			nama_file_hash_file_zip_hashcat="${path}/${nama_file_zip}.hashcat"
 			echo "${hash_file_zip_hashcat}" > "${nama_file_hash_file_zip_hashcat}"
 
 			# kondisi jika isi file hash file zip hashcat kosong
@@ -166,7 +173,7 @@ while true; do
 			echo -e "${b}[*] ${p}Mengekstrak hash file RAR '${nama_file_rar}' ke format John ...${r}"
 			sleep 3
 			hash_file_rar_john=$(rar2john "${nama_file_rar}" 2>/dev/null)
-			nama_file_hash_file_rar_john="${nama_file_rar}.john"
+			nama_file_hash_file_rar_john="${path}/${nama_file_rar}.john"
 			echo "${hash_file_rar_john}" > "${nama_file_hash_file_rar_john}"
 
 			# kondisi jika isi file hash file rar john kosong
@@ -182,7 +189,7 @@ while true; do
 			echo -e "${b}[*] ${p}Mengekstrak hash file RAR '${nama_file_rar}' ke format Hashcat ...${r}"
 			sleep 3
 			hash_file_rar_hashcat=$(rar2john "${nama_file_rar}" 2>/dev/null | cut -d ":" -f 2 | tr -d "[:space:]")
-			nama_file_hash_file_rar_hashcat="${nama_file_rar}.hashcat"
+			nama_file_hash_file_rar_hashcat="${path}/${nama_file_rar}.hashcat"
 			echo "${hash_file_rar_hashcat}" > "${nama_file_hash_file_rar_hashcat}"
 
 			# kondisi jika isi file hash file rar hashcat kosong
@@ -229,7 +236,7 @@ while true; do
 			echo -e "${b}[*] ${p}Mengekstrak hash file 7z '${nama_file_7z}' ke format John ...${r}"
 			sleep 3
 			hash_file_7z_john=$(7z2john "${nama_file_7z}" 2>/dev/null)
-			nama_file_hash_file_7z_john="${nama_file_7z}.john"
+			nama_file_hash_file_7z_john="${path}/${nama_file_7z}.john"
 			echo "${hash_file_7z_john}" > "${nama_file_hash_file_7z_john}"
 
 			# kondisi jika isi file hash file 7z john kosong
@@ -245,7 +252,7 @@ while true; do
 			echo -e "${b}[*] ${p}Mengekstrak hash file 7z '${nama_file_7z}' ke format Hashcat ...${r}"
 			sleep 3
 			hash_file_7z_hashcat=$(7z2john "${nama_file_7z}" 2>/dev/null | cut -d ":" -f 2 | tr -d "[:space:]")
-			nama_file_hash_file_7z_hashcat="${nama_file_7z}.hashcat"
+			nama_file_hash_file_7z_hashcat="${path}/${nama_file_7z}.hashcat"
 			echo "${hash_file_7z_hashcat}" > "${nama_file_hash_file_7z_hashcat}"
 
 			# kondisi jika isi file hash file 7z hashcat kosong
@@ -292,7 +299,7 @@ while true; do
 			echo -e "${b}[*] ${p}Mengekstrak hash file PDF '${nama_file_pdf}' ke format John ...${r}"
 			sleep 3
 			hash_file_pdf_john=$(pdf2john "${nama_file_pdf}" 2>/dev/null)
-			nama_file_hash_file_pdf_john="${nama_file_pdf}.john"
+			nama_file_hash_file_pdf_john="${path}/${nama_file_pdf}.john"
 			echo "${hash_file_pdf_john}" > "${nama_file_hash_file_pdf_john}"
 
 			# kondisi jika isi file hash file pdf john kosong
@@ -308,7 +315,7 @@ while true; do
 			echo -e "${b}[*] ${p}Mengekstrak hash file PDF '${nama_file_pdf}' ke format Hashcat ...${r}"
 			sleep 3
 			hash_file_pdf_hashcat=$(pdf2john "${nama_file_pdf}" 2>/dev/null | cut -d ":" -f 2 | tr -d "[:space:]")
-			nama_file_hash_file_pdf_hashcat="${nama_file_pdf}.hashcat"
+			nama_file_hash_file_pdf_hashcat="${path}/${nama_file_pdf}.hashcat"
 			echo "${hash_file_pdf_hashcat}" > "${nama_file_hash_file_pdf_hashcat}"
 
 			# kondisi jika isi file hash file pdf hashcat kosong
@@ -355,7 +362,7 @@ while true; do
 			echo -e "${b}[*] ${p}Mengekstrak hash file Office '${nama_file_office}' ke format John ...${r}"
 			sleep 3
 			hash_file_office_john=$(office2john "${nama_file_office}" 2>/dev/null)
-			nama_file_hash_file_office_john="${nama_file_office}.john"
+			nama_file_hash_file_office_john="${path}/${nama_file_office}.john"
 			echo "${hash_file_office_john}" > "${nama_file_hash_file_office_john}"
 
 			# kondisi jika isi file hash file office john kosong
@@ -371,7 +378,7 @@ while true; do
 			echo -e "${b}[*] ${p}Mengekstrak hash file Office '${nama_file_office}' ke format Hashcat ...${r}"
 			sleep 3
 			hash_file_office_hashcat=$(office2john "${nama_file_office}" 2>/dev/null | cut -d ":" -f 2 | tr -d "[:space:]")
-			nama_file_hash_file_office_hashcat="${nama_file_office}.hashcat"
+			nama_file_hash_file_office_hashcat="${path}/${nama_file_office}.hashcat"
 			echo "${hash_file_office_hashcat}" > "${nama_file_hash_file_office_hashcat}"
 
 			# kondisi jika isi file hash file office hashcat kosong
