@@ -295,32 +295,44 @@ while true; do
 			nama_file_hash_file_7z_john="${path}/${base_7z_john}.john"
 			echo "${hash_file_7z_john}" > "${nama_file_hash_file_7z_john}"
 
-			# kondisi jika isi file hash file 7z john kosong
-			if [[ -z "${nama_file_hash_file_7z_john}" ]]; then
-				echo -e "${m}[-] ${p}Gagal mengekstrak hash file 7z '${nama_file_7z}' ke format John.${r}"
-				exit 1
-			# kondisi jika isi file hash file 7z john tidak kosong
+
+			if [[ -f "${nama_file_hash_file_7z_john}" ]]; then
+				# kondisi jika isi file hash file 7z john kosong
+				if [[ -z "${nama_file_hash_file_7z_john}" ]]; then
+					echo -e "${m}[-] ${p}Gagal mengekstrak hash file 7z '${nama_file_7z}' ke format John.${r}"
+					exit 1
+				# kondisi jika isi file hash file 7z john tidak kosong
+				else
+					echo -e "${h}[+] ${p}Berhasil mengekstrak hash file 7z '${nama_file_7z}' ke format John.${r}"
+				fi
 			else
-				echo -e "${h}[+] ${p}Berhasil mengekstrak hash file 7z '${nama_file_7z}' ke format John.${r}"
+				echo -e "${m}[-] ${p}Gagal mengekstrak hash file 7z '${nama_file_7z}' ke format John.${r}"
+				exit1
 			fi
 
 			# mengekstrak hash file 7z ke format hashcat
 			echo -e "${b}[*] ${p}Mengekstrak hash file 7z '${nama_file_7z}' ke format Hashcat ...${r}"
 			sleep 3
 			hash_file_7z_hashcat=$("${path_7z2john}" "${nama_file_7z}" 2>/dev/null | cut -d ":" -f 2)
-                        base_7z_hashcat=$(basename "${input_file_7z}")
+	                base_7z_hashcat=$(basename "${input_file_7z}")
 			nama_file_hash_file_7z_hashcat="${path}/${base_7z_hashcat}.hashcat"
 			echo "${hash_file_7z_hashcat}" > "${nama_file_hash_file_7z_hashcat}"
 
-			# kondisi jika isi file hash file 7z hashcat kosong
-			if [[ -z "${nama_file_hash_file_7z_hashcat}" ]]; then
-				echo -e "${m}[-] ${p}Gagal mengekstrak hash file 7z '${nama_file_7z}' ke format Hashcat.${r}"
-				exit 1
+			if [[ -f "${nama_file_hash_file_7z_hashcat}" ]]; then
+				# kondisi jika isi file hash file 7z hashcat kosong
+				if [[ -z "${nama_file_hash_file_7z_hashcat}" ]]; then
+					echo -e "${m}[-] ${p}Gagal mengekstrak hash file 7z '${nama_file_7z}' ke format Hashcat.${r}"
+					exit 1
 
-			# kondisi jika isi file hash file 7z hashcat tidak kosong
+				# kondisi jika isi file hash file 7z hashcat tidak kosong
+				else
+					echo -e "${h}[+] ${p}Berhasil mengekstrak hash file 7z '${nama_file_7z}' ke format Hashcat.${r}"
+				fi
 			else
-				echo -e "${h}[+] ${p}Berhasil mengekstrak hash file 7z '${nama_file_7z}' ke format Hashcat.${r}"
+				echo -e "${m}[-] ${p}Gagal mengekstrak hash file 7z '${nama_file_7z}' ke format Hashcat.${r}"
+                                exit 1
 			fi
+
 			echo ""
 			read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk kembali ke menu utama.\e[0m'
 			break
