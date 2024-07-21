@@ -75,6 +75,9 @@ while true; do
 
 	for menu in "${daftar_menu[@]}"; do
 		echo -e "${p}[${k}${n}${p}] ${menu}${r}"
+                if [[ "${n}" -eq 6 ]]; then
+		        echo "--------------"
+	        fi
 		((n+=1))
 	done
 
