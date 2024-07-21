@@ -427,8 +427,8 @@ while true; do
 			echo -e "${b}[*] ${p}Mengekstrak hash file PDF '${nama_file_pdf}' ke format Hashcat ...${r}"
 			sleep 3
 			hash_file_pdf_hashcat=$("${path_pdf2john}" "${nama_file_pdf}" 2>/dev/null | cut -d ":" -f 2 | tr -d "[:space:]")
-                        base_7z_hashcat=$(basename "${nama_file_7z}")
-			nama_file_hash_file_pdf_hashcat="${path}/${base_7z_hashcat}.hashcat"
+                        base_pdf_hashcat=$(basename "${nama_file_pdf}")
+			nama_file_hash_file_pdf_hashcat="${path}/${base_pdf_hashcat}.hashcat"
 			echo "${hash_file_pdf_hashcat}" > "${nama_file_hash_file_pdf_hashcat}"
 
 			if [[ -f "${nama_file_hash_file_pdf_hashcat}" ]]; then
