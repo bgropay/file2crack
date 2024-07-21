@@ -75,9 +75,13 @@ while true; do
 
 	for menu in "${daftar_menu[@]}"; do
 		echo -e "${p}[${k}${n}${p}] ${menu}${r}"
-                if [[ "${n}" -eq 1 ]]; then
+                if [[ "${n}" -eq 0 ]]; then
 		        echo "--------------"
                 elif [[ "${n}" -eq 5 ]]; then
+		        echo "--------------"
+	        elif [[ "${n}" -eq 10 ]]; then
+		        echo "--------------"
+	        elif [[ "${n}" -eq 16 ]]; then
 		        echo "--------------"
 	        fi
 		((n+=1))
