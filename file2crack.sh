@@ -591,7 +591,7 @@ while true; do
 					break
 				elif [[ "${nanya_zip_john}" == "tidak" ]]; then
 					while true; do
-						read -p $'\e[1;37mMasukkan nama file hash dari file ZIPcho -e "${m}[-] ${p}Coba gunakan Wordlist yang lain.${r}": \e[1;33m' nama_file_hash_dari_file_zip_john
+						read -p $'\e[1;37mMasukkan nama file hash dari file ZIP: \e[1;33m' nama_file_hash_dari_file_zip_john
 						if [[ -z "${nama_file_hash_dari_file_zip_john}" ]]; then
 							echo -e "${m}[-] ${p}Nama file hash tidak boleh kosong.${r}"
 							continue
