@@ -43,6 +43,16 @@ daftar_menu=(
 	"Ekstrak hash file 7z"
 	"Ekstrak hash file PDF"
 	"Ekstrak hash file Office (docx, xlsx, pptx)"
+        "Crack kata sandi file ZIP dengan John"
+	"Crack kata sandi file RAR dengan John"
+        "Crack kata sandi file 7z dengan John"
+	"Crack kata sandi file PDF dengan John"
+        "Crack kata sandi file Office (docx, xlsx, pptx) dengan John"
+	"Crack kata sandi file ZIP dengan Hashcat"
+        "Crack kata sandi file RAR dengan Hashcat"
+	"Crack kata sandi file 7z dengan Hashcat"
+        "Crack kata sandi file PDF dengan Hashcat"
+	"Crack kata sandi file Office (docx, xlsx, pptx) dengan Hashcat"
 	"Tentang"
 )
 
