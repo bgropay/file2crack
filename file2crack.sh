@@ -133,7 +133,7 @@ while true; do
 
 			if [[ -f "${nama_file_hash_file_zip_john}" ]]; then
 				# kondisi jika isi file hash file zip john kosong
-				if [[ -z "${nama_file_hash_file_zip_john}" ]]; then
+				if [[ ! -s "${nama_file_hash_file_zip_john}" ]]; then
 					echo -e "${m}[-] ${p}Gagal mengekstrak hash file ZIP '${nama_file_zip}' ke format John.${r}"
 					exit 1
 				# kondisi jika isi file hash file zip john tidak kosong
@@ -155,7 +155,7 @@ while true; do
 
 			if [[ -f "${nama_file_hash_file_zip_hashcat}" ]]; then
 				# kondisi jika isi file hash file zip hashcat kosong
-				if [[ -z "${nama_file_hash_file_zip_hashcat}" ]]; then
+				if [[ ! -s "${nama_file_hash_file_zip_hashcat}" ]]; then
 					echo -e "${m}[-] ${p}Gagal mengekstrak hash file ZIP '${nama_file_zip}' ke format Hashcat.${r}"
 					exit 1
 				# kondisi jika isi file hash file zip hashcat tidak kosong
@@ -225,7 +225,7 @@ while true; do
 
 			if [[ -f "${nama_file_hash_file_rar_john}" ]]; then
 				# kondisi jika isi file hash file rar john kosong
-				if [[ -z "${nama_file_hash_file_rar_john}" ]]; then
+				if [[ ! -s "${nama_file_hash_file_rar_john}" ]]; then
 					echo -e "${m}[-] ${p}Gagal mengekstrak hash file RAR '${nama_file_rar}' ke format John.${r}"
 					exit 1
 				# kondisi jika isi file hash file rar john tidak kosong
@@ -247,7 +247,7 @@ while true; do
 
 			if [[ -f "${nama_file_hash_file_rar_hashcat}" ]]; then
 				# kondisi jika isi file hash file rar hashcat kosong
-				if [[ -z "${nama_file_hash_file_rar_hashcat}" ]]; then
+				if [[ ! -s "${nama_file_hash_file_rar_hashcat}" ]]; then
 					echo -e "${m}[-] ${p}Gagal mengekstrak hash file RAR '${nama_file_rar}' ke format Hashcat.${r}"
 					exit 1
 				# kondisi jika isi file hash file rar hashcat tidak kosong
@@ -318,7 +318,7 @@ while true; do
 
 			if [[ -f "${nama_file_hash_file_7z_john}" ]]; then
 				# kondisi jika isi file hash file 7z john kosong
-				if [[ -z "${nama_file_hash_file_7z_john}" ]]; then
+				if [[ ! -s "${nama_file_hash_file_7z_john}" ]]; then
 					echo -e "${m}[-] ${p}Gagal mengekstrak hash file 7z '${nama_file_7z}' ke format John.${r}"
 					exit 1
 				# kondisi jika isi file hash file 7z john tidak kosong
@@ -340,7 +340,7 @@ while true; do
 
 			if [[ -f "${nama_file_hash_file_7z_hashcat}" ]]; then
 				# kondisi jika isi file hash file 7z hashcat kosong
-				if [[ -z "${nama_file_hash_file_7z_hashcat}" ]]; then
+				if [[ ! -s "${nama_file_hash_file_7z_hashcat}" ]]; then
 					echo -e "${m}[-] ${p}Gagal mengekstrak hash file 7z '${nama_file_7z}' ke format Hashcat.${r}"
 					exit 1
 
@@ -411,7 +411,7 @@ while true; do
 
 			if [[ -f "${nama_file_hash_file_pdf_john}" ]]; then
 				# kondisi jika isi file hash file pdf john kosong
-				if [[ -z "${nama_file_hash_file_pdf_john}" ]]; then
+				if [[ ! -s "${nama_file_hash_file_pdf_john}" ]]; then
 					echo -e "${m}[-] ${p}Gagal mengekstrak hash file PDF '${nama_file_pdf}' ke format John.${r}"
 					exit 1
 				# kondisi jika isi file hash file pdf john tidak kosong
@@ -433,7 +433,7 @@ while true; do
 
 			if [[ -f "${nama_file_hash_file_pdf_hashcat}" ]]; then
 				# kondisi jika isi file hash file pdf hashcat kosong
-				if [[ -z "${nama_file_hash_file_pdf_hashcat}" ]]; then
+				if [[ ! -s "${nama_file_hash_file_pdf_hashcat}" ]]; then
 					echo -e "${m}[-] ${p}Gagal mengekstrak hash file PDF '${nama_file_pdf}' ke format Hashcat.${r}"
 					exit 1
 				# kondisi jika isi file hash file pdf hashcat tidak kosong
@@ -503,7 +503,7 @@ while true; do
 
 			if [[ -f "${nama_file_hash_file_office_john}" ]]; then
 				# kondisi jika isi file hash file office john kosong
-				if [[ -z "${nama_file_hash_file_office_john}" ]]; then
+				if [[ ! -s "${nama_file_hash_file_office_john}" ]]; then
 					echo -e "${m}[-] ${p}Gagal mengekstrak hash file Office '${nama_file_office}' ke format John.${r}"
 					exit 1
 				# kondisi jika isi file hash file office john tidak kosong
@@ -525,7 +525,7 @@ while true; do
 
 			if [[ -f "${nama_file_hash_file_office_hashcat}" ]]; then
 				# kondisi jika isi file hash file office hashcat kosong
-				if [[ -z "${nama_file_hash_file_office_hashcat}" ]]; then
+				if [[ ! -s "${nama_file_hash_file_office_hashcat}" ]]; then
 					echo -e "${m}[-] ${p}Gagal mengekstrak hash file Office '${nama_file_office}' ke format Hashcat.${r}"
 					exit 1
 				# kondisi jika isi file hash file office hashcat tidak kosong
