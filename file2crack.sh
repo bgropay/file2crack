@@ -90,8 +90,6 @@ while true; do
 		((n+=1))
 	done
 
-	echo ""
-
 	read -p $'\e[1;37mPilih menu: \e[1;33m' pilih_menu
 	if [[ -z "${pilih_menu}" ]]; then
 		echo -e "${m}[-] ${p}Menu tidak boleh kosong. Silahkan pilih kembali..${r}"
