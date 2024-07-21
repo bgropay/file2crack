@@ -65,7 +65,7 @@ while true; do
 	waktu=$(date +"%d-%m-%Y %H:%M:%S")
 
 	# konter angka anggota list
-	n=0
+	n=-0
 
 	# menampilkan waktu saat ini dan menu
 	echo -e "${p}[${h}${waktu}${p}] [${c}file2crack${p}]${r}"
