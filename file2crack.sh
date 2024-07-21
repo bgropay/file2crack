@@ -313,8 +313,8 @@ while true; do
 			# mengekstrak hash file 7z ke format hashcat
 			echo -e "${b}[*] ${p}Mengekstrak hash file 7z '${nama_file_7z}' ke format Hashcat ...${r}"
 			sleep 3
-			hash_file_7z_hashcat=$("${path_7z2john}" "${nama_file_7z}" 2>/dev/null | cut -d ":" -f 2)
-	                base_7z_hashcat=$(basename "${input_file_7z}")
+			hash_file_7z_hashcat=$("${path_7z2john}" "${nama_file_7z}" 2>/dev/null | cut -d ":" -f 2 | tr -d "[:space:]")
+	                base_7z_hashcat=$(basename "${nama_file_7z}")
 			nama_file_hash_file_7z_hashcat="${path}/${base_7z_hashcat}.hashcat"
 			echo "${hash_file_7z_hashcat}" > "${nama_file_hash_file_7z_hashcat}"
 
