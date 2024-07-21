@@ -484,7 +484,7 @@ while true; do
 			fi
 
 			# kondisi jika file bukan file office
-			if [[ "${nama_file_office##*.}" != "docx" || "${nama_file_office##*.}" != "xlsx" || "${nama_file_office##*.}" != "pptx" ]]; then
+			if [[ "${nama_file_office##*.}" != "docx" ]] || [[ "${nama_file_office##*.}" != "xlsx" ]] || [[ "${nama_file_office##*.}" != "pptx" ]]; then
 				echo -e "${m}[-] ${p}File '${nama_file_office}' bukan file Office.${r}"
 				continue
 			fi
