@@ -81,7 +81,7 @@ while true; do
 		        echo "--------------"
 	        elif [[ "${n}" -eq 10 ]]; then
 		        echo "--------------"
-	        elif [[ "${n}" -eq 16 ]]; then
+	        elif [[ "${n}" -eq 15 ]]; then
 		        echo "--------------"
 	        fi
 		((n+=1))
