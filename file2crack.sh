@@ -140,7 +140,6 @@ while true; do
 			fi
 
 			# kondisi jika file zip ditemukan
-                        echo ""
 			echo -e "${h}[+] ${p}File ZIP '${nama_file_zip}' ditemukan.${r}"
 
 			# mengekstrak hash file zip ke format john
@@ -166,7 +165,7 @@ while true; do
 			fi
 
 			# mengekstrak hash file zip ke format hashcat
-			echo -e "${b}[*] ${p}Mengekstrak hash file ZIP '${nama_file_zip}' ke format Hashcat${i}${r}"
+			echo -e "${b}[*] ${p}Mengekstrak hash file ZIP '${nama_file_zip}' ke format Hashcat ...${r}"
 			sleep 3
 			hash_file_zip_hashcat=$("${path_zip2john}" "${nama_file_zip}" 2>/dev/null | cut -d ":" -f 2 | tr -d "[:space:]")
                         base=$(basename "${nama_file_zip}")
@@ -187,7 +186,6 @@ while true; do
 				exit 1
 			fi
 
-			echo ""
 			read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk kembali ke menu utama.\e[0m'
 			break
 		done
@@ -232,7 +230,6 @@ while true; do
 			fi
 
 			# kondisi jika file rar ditemukan
-                        echo ""
 			echo -e "${h}[+] ${p}File RAR '${nama_file_rar}' ditemukan.${r}"
 
 			# mengekstrak hash file rar ke format john
@@ -279,7 +276,6 @@ while true; do
 				exit 1
 			fi
 
-			echo ""
 			read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk kembali ke menu utama.\e[0m'
 			break
 		done
@@ -324,7 +320,6 @@ while true; do
 			fi
 
 			# kondisi jika file 7z ditemukan
-                        echo ""
 			echo -e "${h}[+] ${p}File 7z '${nama_file_7z}' ditemukan.${r}"
 
 			# mengekstrak hash file 7z ke format john
@@ -373,7 +368,6 @@ while true; do
                                 exit 1
 			fi
 
-			echo ""
 			read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk kembali ke menu utama.\e[0m'
 			break
 		done
@@ -418,7 +412,6 @@ while true; do
 			fi
 
 			# kondisi jika file pdf ditemukan
-                        echo ""
 			echo -e "${h}[+] ${p}File PDF '${nama_file_pdf}' ditemukan.${r}"
 
 			# mengekstrak hash file pdf ke format john
@@ -465,7 +458,6 @@ while true; do
 				exit 1
 			fi
 
-			echo ""
 			read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk kembali ke menu utama.\e[0m'
 			break
 		done
@@ -510,7 +502,6 @@ while true; do
 			fi
 
 			# kondisi jika file office ditemukan
-                        echo ""
 			echo -e "${h}[+] ${p}File Office '${nama_file_office}' ditemukan.${r}"
 
 			# mengekstrak hash file office ke format john
@@ -557,10 +548,908 @@ while true; do
 				exit 1
 			fi
 
-			echo ""
 			read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk kembali ke menu utama.\e[0m'
 			break
 		done
+	elif [[ "${pilih_menu}" == "6" ]]; then
+		target_hash_zip_john="${nama_file_hash_file_zip_john}"
+		if [[ -f "${target_hash_zip_john}" ]]; then
+			echo -e "${b}[*] ${p}Pada sesi ini Anda sudah memiliki file hash dari file ZIP '${nama_file_zip}' (${h}${target_hash_zip_john}${p}).${r}"
+			while true; do
+				read -p $'\e[1;37mApakah Anda ingin menggunakannya (iya/tidak): \e[1;33m' nanya_zip_john
+				if [[ "${nanya_zip_john}" == "iya" ]]; then
+					while true; do
+						read -p $'\e[1;37mMasukkan nama file Wordlist: \e[1;33m' nama_file_wordlist_zip_john
+						if [[ -z "${nama_file_wordlist_zip_john}" ]]; then
+							echo -e "${m}[-] ${p}Nama file Wordlist tidak boleh kosong.${r}"
+							continue
+						else
+							if [[ ! -f "${nama_file_wordlist_zip_john}" ]]; then
+								echo -e "${m}[-] ${p}File Wordlist '${nama_file_wordlist_zip_john}' tidak ditemukan.${r}"
+								continue
+							else
+								path_zip_john="john"
+								pot_zip_john="pot_zip_john.txt"
+								echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_zip_john}' ditemukan.${r}"
+								read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
+								echo -e "${b}[*] ${p}Cracking kata sandi file ZIP '${nama_file_zip}' dengan John...${r}"
+								crack_zip_john=$("${path_zip_john}" --wordlist="${nama_file_wordlist_zip_john}" --pot="${pot_zip_john}" "${target_hash_zip_john}" > /dev/null 2>&1)
+								show_result_crack_zip_john=$("${path_zip_john}" --show "${target_hash_zip_john}" --pot="${pot_zip_john}" > /dev/null 2>&1)
+								if [[ $(cat "${pot_zip_john}" | grep -o ":") ]]; then
+									kata_sandi_zip_john=$(cat "${pot_zip_john}" | cut -d ":" -f 2)
+									echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
+									echo -e "${h}[+] ${p}Kata sandi: ${h}${kata_sandi_zip_john}${r}"
+									rm "${pot_zip_john}"
+								else
+									echo -e "${m}[-] ${p}Kata sandi tidak ditemukan.${r}"
+									echo -e "${m}[-] ${p}Coba gunakan Wordlist yang lain.${r}"
+								fi
+								break
+							fi
+						fi
+					done
+					break
+				elif [[ "${nanya_zip_john}" == "tidak" ]]; then
+					while true; do
+						read -p $'\e[1;37mMasukkan nama file hash dari file ZIPcho -e "${m}[-] ${p}Coba gunakan Wordlist yang lain.${r}": \e[1;33m' nama_file_hash_dari_file_zip_john
+						if [[ -z "${nama_file_hash_dari_file_zip_john}" ]]; then
+							echo -e "${m}[-] ${p}Nama file hash tidak boleh kosong.${r}"
+							continue
+						else
+							if [[ ! -f "${nama_file_hash_dari_file_zip_john}" ]]; then
+								echo -e "${m}[-] ${p}File hash '${nama_file_hash_dari_file_zip_john}' tidak ditemukan.${r}"
+								continue
+							else
+								if [[ $(cat "${nama_file_hash_dari_file_zip_john}" | grep -o "zip" && cat "${nama_file_hash_dari_file_zip_john}" | grep -o "pkzip") ]]; then
+									echo -e "${h}[+] ${p}File hash '${nama_file_hash_dari_file_zip_john}' ditemukan.${r}"
+									while true; do
+										read -p $'\e[1;37mMasukkan nama file Wordlist: \e[1;33m' nama_file_wordlist_zip_john
+										if [[ -z "${nama_file_wordlist_zip_john}" ]]; then
+											echo -e "${m}[-] ${p}Nama file Wordlist tidak boleh kosong.${r}"
+											continue
+										else
+											if [[ ! -f "${nama_file_wordlist_zip_john}" ]]; then
+												echo -e "${m}[-] ${p}File Wordlist '${nama_file_wordlist_zip_john}' tidak ditemukan.${r}"
+												continue
+											else
+												path_zip_john="john"
+												pot_zip_john="pot_zip_john.txt"
+												echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_zip_john}' ditemukan.${r}"
+												read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
+												echo -e "${b}[*] ${p}Cracking kata sandi file ZIP '${nama_file_zip}' dengan John...${r}"
+												crack_zip_john=$("${path_zip_john}" --wordlist="${nama_file_wordlist_zip_john}" --pot="${pot_zip_john}" "${target_hash_zip_john}" > /dev/null 2>&1)
+												show_result_crack_zip_john=$("${path_zip_john}" --show "${target_hash_zip_john}" --pot="${pot_zip_john}" > /dev/null 2>&1)
+												if [[ $(cat "${pot_zip_john}" | grep -o ":") ]]; then
+													kata_sandi_zip_john=$(cat "${pot_zip_john}" | cut -d ":" -f 2)
+													echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
+													echo -e "${h}[+] ${p}Kata sandi: ${h}${kata_sandi_zip_john}${r}"
+													rm "${pot_zip_john}"
+												else
+													echo -e "${m}[-] ${p}Kata sandi tidak ditemukan.${r}"
+													echo -e "${m}[-] ${p}Coba gunakan Wordlist yang lain.${r}"
+												fi
+												break
+											fi
+										fi
+									done
+								else
+									echo -e "${m}[-] ${p}Format hash file hash '{nama_file_hash_dari_file_zip_john}' tidak valid.${r}"
+									continue
+								fi
+
+							fi
+						fi
+						break
+					done
+					break
+				fi
+			done
+
+		else
+
+			# memasukkan nama file zip
+			while true; do
+				read -p $'\e[1;37mMasukkan nama file ZIP: \e[1;33m' nama_file_zip
+
+				# kondisi jika nama file zip kosong
+				if [[ -z "${nama_file_zip}" ]]; then
+					echo -e "${m}[-] ${p}Nama file ZIP tidak boleh kosong.${r}"
+					continue
+				fi
+
+				# kondisi jika file zip tidak ditemukan
+				if [[ ! -f "${nama_file_zip}" ]]; then
+					echo -e "${m}[-] ${p}File ZIP '${nama_file_zip}' tidak ditemukan.${r}"
+					continue
+				fi
+
+				# kondisi jika file bukan file zip
+				if [[ "${nama_file_zip##*.}" != "zip" ]]; then
+					echo -e "${m}[-] ${p}File '${nama_file_zip}' bukan file ZIP.${r}"
+					continue
+				fi
+
+				# kondisi jika file zip ditemukan
+				echo -e "${h}[+] ${p}File ZIP '${nama_file_zip}' ditemukan.${r}"
+				break
+			done
+
+
+			while true; do
+				read -p $'\e[1;37mMasukkan nama file hash dari file ZIP: \e[1;33m' nama_file_hash_dari_file_zip_john
+				if [[ -z "${nama_file_hash_dari_file_zip_john}" ]]; then
+					echo -e "${m}[-] ${p}Nama file hash tidak boleh kosong.${r}"
+					continue
+				else
+					if [[ ! -f "${nama_file_hash_dari_file_zip_john}" ]]; then
+						echo -e "${m}[-] ${p}File hash '${nama_file_hash_dari_file_zip_john}' tidak ditemukan.${r}"
+						continue
+					else
+						if [[ $(cat "${nama_file_hash_dari_file_zip_john}" | grep -o "zip" && cat "${nama_file_hash_dari_file_zip_john}" | grep -o "pkzip") ]]; then
+							echo -e "${h}[+] ${p}File hash '${nama_file_hash_dari_file_zip_john}' ditemukan.${r}"
+							while true; do
+								read -p $'\e[1;37mMasukkan nama file Wordlist: \e[1;33m' nama_file_wordlist_zip_john
+								if [[ -z "${nama_file_wordlist_zip_john}" ]]; then
+									echo -e "${m}[-] ${p}Nama file Wordlist tidak boleh kosong.${r}"
+									continue
+								else
+									if [[ ! -f "${nama_file_wordlist_zip_john}" ]]; then
+										echo -e "${m}[-] ${p}File Wordlist '${nama_file_wordlist_zip_john}' tidak ditemukan.${r}"
+										continue
+									else
+										path_zip_john="john"
+										pot_zip_john="pot_zip_john.txt"
+										echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_zip_john}' ditemukan.${r}"
+										read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
+										echo -e "${b}[*] ${p}Cracking kata sandi file ZIP '${nama_file_zip}' dengan John...${r}"
+										crack_zip_john=$("${path_zip_john}" --wordlist="${nama_file_wordlist_zip_john}" --pot="${pot_zip_john}" "${target_hash_zip_john}" > /dev/null 2>&1)
+										show_result_crack_zip_john=$("${path_zip_john}" --show "${target_hash_zip_john}" --pot="${pot_zip_john}" > /dev/null 2>&1)
+										if [[ $(cat "${pot_zip_john}" | grep -o ":") ]]; then
+											kata_sandi_zip_john=$(cat "${pot_zip_john}" | cut -d ":" -f 2)
+											echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
+											echo -e "${h}[+] ${p}Kata sandi: ${h}${kata_sandi_zip_john}${r}"
+											rm "${pot_zip_john}"
+										else
+											echo -e "${m}[-] ${p}Kata sandi tidak ditemukan.${r}"
+											echo -e "${m}[-] ${p}Coba gunakan Wordlist yang lain.${r}"
+										fi
+										break
+									fi
+								fi
+							done
+						else
+							echo -e "${m}[-] ${p}Format hash file hash '${nama_file_hash_dari_file_zip_john}' tidak valid.${r}"
+							continue
+						fi
+					fi
+				fi
+				break
+			done
+
+
+		fi
+        	read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk kembali ke menu utama.\e[0m'
+
+	elif [[ "${pilih_menu}" == "7" ]]; then
+		target_hash_rar_john="${nama_file_hash_file_rar_john}"
+		if [[ -f "${target_hash_rar_john}" ]]; then
+			echo -e "${b}[*] ${p}Pada sesi ini Anda sudah memiliki file hash dari file RAR '${nama_file_rar}' (${h}${target_hash_rar_john}${p}).${r}"
+			while true; do
+				read -p $'\e[1;37mApakah Anda ingin menggunakannya (iya/tidak): \e[1;33m' nanya_rar_john
+				if [[ "${nanya_rar_john}" == "iya" ]]; then
+					while true; do
+						read -p $'\e[1;37mMasukkan nama file Wordlist: \e[1;33m' nama_file_wordlist_rar_john
+						if [[ -z "${nama_file_wordlist_rar_john}" ]]; then
+							echo -e "${m}[-] ${p}Nama file Wordlist tidak boleh kosong.${r}"
+							continue
+						else
+							if [[ ! -f "${nama_file_wordlist_rar_john}" ]]; then
+								echo -e "${m}[-] ${p}File Wordlist '${nama_file_wordlist_rar_john}' tidak ditemukan.${r}"
+								continue
+							else
+								path_rar_john="john"
+								pot_rar_john="pot_rar_john.txt"
+								echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_rar_john}' ditemukan.${r}"
+								read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
+								echo -e "${b}[*] ${p}Cracking kata sandi file RAR '${nama_file_rar}' dengan John...${r}"
+								crack_rar_john=$("${path_rar_john}" --wordlist="${nama_file_wordlist_rar_john}" --pot="${pot_rar_john}" "${target_hash_rar_john}" > /dev/null 2>&1)
+								show_result_crack_rar_john=$("${path_rar_john}" --show "${target_hash_rar_john}" --pot="${pot_rar_john}" > /dev/null 2>&1)
+								if [[ $(cat "${pot_rar_john}" | grep -o ":") ]]; then
+									kata_sandi_rar_john=$(cat "${pot_rar_john}" | cut -d ":" -f 2)
+									echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
+									echo -e "${h}[+] ${p}Kata sandi: ${h}${kata_sandi_rar_john}${r}"
+									rm "${pot_rar_john}"
+								else
+									echo -e "${m}[-] ${p}Kata sandi tidak ditemukan.${r}"
+									echo -e "${m}[-] ${p}Coba gunakan Wordlist yang lain.${r}"
+								fi
+								break
+							fi
+						fi
+					done
+					break
+				elif [[ "${nanya_rar_john}" == "tidak" ]]; then
+					while true; do
+						read -p $'\e[1;37mMasukkan nama file hash dari file RAR: \e[1;33m' nama_file_hash_dari_file_rar_john
+						if [[ -z "${nama_file_hash_dari_file_rar_john}" ]]; then
+							echo -e "${m}[-] ${p}Nama file hash tidak boleh kosong.${r}"
+							continue
+						else
+							if [[ ! -f "${nama_file_hash_dari_file_rar_john}" ]]; then
+								echo -e "${m}[-] ${p}File hash '${nama_file_hash_dari_file_rar_john}' tidak ditemukan.${r}"
+								continue
+							else
+								if [[ $(cat "${nama_file_hash_dari_file_rar_john}" | grep -o "rar5") ]]; then
+									echo -e "${h}[+] ${p}File hash '${nama_file_hash_dari_file_rar_john}' ditemukan.${r}"
+									while true; do
+										read -p $'\e[1;37mMasukkan nama file Wordlist: \e[1;33m' nama_file_wordlist_rar_john
+										if [[ -z "${nama_file_wordlist_rar_john}" ]]; then
+											echo -e "${m}[-] ${p}Nama file Wordlist tidak boleh kosong.${r}"
+											continue
+										else
+											if [[ ! -f "${nama_file_wordlist_rar_john}" ]]; then
+												echo -e "${m}[-] ${p}File Wordlist '${nama_file_wordlist_rar_john}' tidak ditemukan.${r}"
+												continue
+											else
+												path_rar_john="john"
+												pot_rar_john="pot_rar_john.txt"
+												echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_rar_john}' ditemukan.${r}"
+												read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
+												echo -e "${b}[*] ${p}Cracking kata sandi file RAR '${nama_file_rar}' dengan John...${r}"
+												crack_rar_john=$("${path_rar_john}" --wordlist="${nama_file_wordlist_rar_john}" --pot="${pot_rar_john}" "${target_hash_rar_john}" > /dev/null 2>&1)
+												show_result_crack_rar_john=$("${path_rar_john}" --show "${target_hash_rar_john}" --pot="${pot_rar_john}" > /dev/null 2>&1)
+												if [[ $(cat "${pot_rar_john}" | grep -o ":") ]]; then
+													kata_sandi_rar_john=$(cat "${pot_rar_john}" | cut -d ":" -f 2)
+													echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
+													echo -e "${h}[+] ${p}Kata sandi: ${h}${kata_sandi_rar_john}${r}"
+													rm "${pot_rar_john}"
+												else
+													echo -e "${m}[-] ${p}Kata sandi tidak ditemukan.${r}"
+													echo -e "${m}[-] ${p}Coba gunakan Wordlist yang lain.${r}"
+												fi
+												break
+											fi
+										fi
+									done
+								else
+									echo -e "${m}[-] ${p}Format hash file hash '{nama_file_hash_dari_file_rar_john}' tidak valid.${r}"
+									continue
+								fi
+
+							fi
+						fi
+						break
+					done
+					break
+				fi
+			done
+
+		else
+
+
+			# memasukkan nama file rar
+			while true; do
+				read -p $'\e[1;37mMasukkan nama file RAR: \e[1;33m' nama_file_rar
+
+				# kondisi jika nama file rar kosong
+				if [[ -z "${nama_file_rar}" ]]; then
+					echo -e "${m}[-] ${p}Nama file RAR tidak boleh kosong.${r}"
+					continue
+				fi
+
+				# kondisi jika file rar tidak ditemukan
+				if [[ ! -f "${nama_file_rar}" ]]; then
+					echo -e "${m}[-] ${p}File RAR '${nama_file_rar}' tidak ditemukan.${r}"
+					continue
+				fi
+
+				# kondisi jika file bukan file rar
+				if [[ "${nama_file_rar##*.}" != "rar" ]]; then
+					echo -e "${m}[-] ${p}File '${nama_file_rar}' bukan file RAR.${r}"
+					continue
+				fi
+
+				# kondisi jika file rar ditemukan
+				echo -e "${h}[+] ${p}File RAR '${nama_file_rar}' ditemukan.${r}"
+				break
+			done
+
+
+			while true; do
+				read -p $'\e[1;37mMasukkan nama file hash dari file RAR: \e[1;33m' nama_file_hash_dari_file_rar_john
+				if [[ -z "${nama_file_hash_dari_file_rar_john}" ]]; then
+					echo -e "${m}[-] ${p}Nama file hash tidak boleh kosong.${r}"
+					continue
+				else
+					if [[ ! -f "${nama_file_hash_dari_file_rar_john}" ]]; then
+						echo -e "${m}[-] ${p}File hash '${nama_file_hash_dari_file_rar_john}' tidak ditemukan.${r}"
+						continue
+					else
+						if [[ $(cat "${nama_file_hash_dari_file_rar_john}" | grep -o "rar5") ]]; then
+							echo -e "${h}[+] ${p}File hash '${nama_file_hash_dari_file_rar_john}' ditemukan.${r}"
+							while true; do
+								read -p $'\e[1;37mMasukkan nama file Wordlist: \e[1;33m' nama_file_wordlist_rar_john
+								if [[ -z "${nama_file_wordlist_rar_john}" ]]; then
+									echo -e "${m}[-] ${p}Nama file Wordlist tidak boleh kosong.${r}"
+									continue
+								else
+									if [[ ! -f "${nama_file_wordlist_rar_john}" ]]; then
+										echo -e "${m}[-] ${p}File Wordlist '${nama_file_wordlist_rar_john}' tidak ditemukan.${r}"
+										continue
+									else
+										path_rar_john="john"
+										pot_rar_john="pot_rar_john.txt"
+										echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_rar_john}' ditemukan.${r}"
+										read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
+										echo -e "${b}[*] ${p}Cracking kata sandi file RAR '${nama_file_rar}' dengan John...${r}"
+										crack_rar_john=$("${path_rar_john}" --wordlist="${nama_file_wordlist_rar_john}" --pot="${pot_rar_john}" "${target_hash_rar_john}" > /dev/null 2>&1)
+										show_result_crack_rar_john=$("${path_rar_john}" --show "${target_hash_rar_john}" --pot="${pot_rar_john}" > /dev/null 2>&1)
+										if [[ $(cat "${pot_rar_john}" | grep -o ":") ]]; then
+											kata_sandi_rar_john=$(cat "${pot_rar_john}" | cut -d ":" -f 2)
+											echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
+											echo -e "${h}[+] ${p}Kata sandi: ${h}${kata_sandi_rar_john}${r}"
+											rm "${pot_rar_john}"
+										else
+											echo -e "${m}[-] ${p}Kata sandi tidak ditemukan.${r}"
+											echo -e "${m}[-] ${p}Coba gunakan Wordlist yang lain.${r}"
+										fi
+										break
+									fi
+								fi
+							done
+						else
+							echo -e "${m}[-] ${p}Format hash file hash '${nama_file_hash_dari_file_rar_john}' tidak valid.${r}"
+							continue
+						fi
+					fi
+				fi
+				break
+			done
+
+
+		fi
+        	read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk kembali ke menu utama.\e[0m'
+
+	elif [[ "${pilih_menu}" == "8" ]]; then
+		target_hash_7z_john="${nama_file_hash_file_7z_john}"
+		if [[ -f "${target_hash_7z_john}" ]]; then
+			echo -e "${b}[*] ${p}Pada sesi ini Anda sudah memiliki file hash dari file 7z '${nama_file_7z}' (${h}${target_hash_7z_john}${p}).${r}"
+			while true; do
+				read -p $'\e[1;37mApakah Anda ingin menggunakannya (iya/tidak): \e[1;33m' nanya_7z_john
+				if [[ "${nanya_7z_john}" == "iya" ]]; then
+					while true; do
+						read -p $'\e[1;37mMasukkan nama file Wordlist: \e[1;33m' nama_file_wordlist_7z_john
+						if [[ -z "${nama_file_wordlist_7z_john}" ]]; then
+							echo -e "${m}[-] ${p}Nama file Wordlist tidak boleh kosong.${r}"
+							continue
+						else
+							if [[ ! -f "${nama_file_wordlist_7z_john}" ]]; then
+								echo -e "${m}[-] ${p}File Wordlist '${nama_file_wordlist_7z_john}' tidak ditemukan.${r}"
+								continue
+							else
+								path_7z_john="john"
+								pot_7z_john="pot_7z_john.txt"
+								echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_7z_john}' ditemukan.${r}"
+								read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
+								echo -e "${b}[*] ${p}Cracking kata sandi file 7z '${nama_file_7z}' dengan John...${r}"
+								crack_7z_john=$("${path_7z_john}" --wordlist="${nama_file_wordlist_7z_john}" --pot="${pot_7z_john}" "${target_hash_7z_john}" > /dev/null 2>&1)
+								show_result_crack_7z_john=$("${path_7z_john}" --show "${target_hash_7z_john}" --pot="${pot_7z_john}" > /dev/null 2>&1)
+								if [[ $(cat "${pot_7z_john}" | grep -o ":") ]]; then
+									kata_sandi_7z_john=$(cat "${pot_7z_john}" | cut -d ":" -f 2)
+									echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
+									echo -e "${h}[+] ${p}Kata sandi: ${h}${kata_sandi_7z_john}${r}"
+									rm "${pot_7z_john}"
+								else
+									echo -e "${m}[-] ${p}Kata sandi tidak ditemukan.${r}"
+									echo -e "${m}[-] ${p}Coba gunakan Wordlist yang lain.${r}"
+								fi
+								break
+							fi
+						fi
+					done
+					break
+				elif [[ "${nanya_7z_john}" == "tidak" ]]; then
+					while true; do
+						read -p $'\e[1;37mMasukkan nama file hash dari file 7z: \e[1;33m' nama_file_hash_dari_file_7z_john
+						if [[ -z "${nama_file_hash_dari_file_7z_john}" ]]; then
+							echo -e "${m}[-] ${p}Nama file hash tidak boleh kosong.${r}"
+							continue
+						else
+							if [[ ! -f "${nama_file_hash_dari_file_7z_john}" ]]; then
+								echo -e "${m}[-] ${p}File hash '${nama_file_hash_dari_file_7z_john}' tidak ditemukan.${r}"
+								continue
+							else
+								if [[ $(cat "${nama_file_hash_dari_file_7z_john}" | grep -o "7z") ]]; then
+									echo -e "${h}[+] ${p}File hash '${nama_file_hash_dari_file_7z_john}' ditemukan.${r}"
+									while true; do
+										read -p $'\e[1;37mMasukkan nama file Wordlist: \e[1;33m' nama_file_wordlist_7z_john
+										if [[ -z "${nama_file_wordlist_7z_john}" ]]; then
+											echo -e "${m}[-] ${p}Nama file Wordlist tidak boleh kosong.${r}"
+											continue
+										else
+											if [[ ! -f "${nama_file_wordlist_7z_john}" ]]; then
+												echo -e "${m}[-] ${p}File Wordlist '${nama_file_wordlist_7z_john}' tidak ditemukan.${r}"
+												continue
+											else
+												path_7z_john="john"
+												pot_7z_john="pot_7z_john.txt"
+												echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_7z_john}' ditemukan.${r}"
+												read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
+												echo -e "${b}[*] ${p}Cracking kata sandi file 7z '${nama_file_7z}' dengan John...${r}"
+												crack_7z_john=$("${path_7z_john}" --wordlist="${nama_file_wordlist_7z_john}" --pot="${pot_7z_john}" "${target_hash_7z_john}" > /dev/null 2>&1)
+												show_result_crack_7z_john=$("${path_7z_john}" --show "${target_hash_7z_john}" --pot="${pot_7z_john}" > /dev/null 2>&1)
+												if [[ $(cat "${pot_7z_john}" | grep -o ":") ]]; then
+													kata_sandi_7z_john=$(cat "${pot_7z_john}" | cut -d ":" -f 2)
+													echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
+													echo -e "${h}[+] ${p}Kata sandi: ${h}${kata_sandi_7z_john}${r}"
+													rm "${pot_7z_john}"
+												else
+													echo -e "${m}[-] ${p}Kata sandi tidak ditemukan.${r}"
+													echo -e "${m}[-] ${p}Coba gunakan Wordlist yang lain.${r}"
+												fi
+												break
+											fi
+										fi
+									done
+								else
+									echo -e "${m}[-] ${p}Format hash file hash '{nama_file_hash_dari_file_7z_john}' tidak valid.${r}"
+									continue
+								fi
+
+							fi
+						fi
+						break
+					done
+					break
+				fi
+			done
+
+		else
+
+
+			# memasukkan nama file 7z
+			while true; do
+				read -p $'\e[1;37mMasukkan nama file 7z: \e[1;33m' nama_file_7z
+
+				# kondisi jika nama file 7z kosong
+				if [[ -z "${nama_file_7z}" ]]; then
+					echo -e "${m}[-] ${p}Nama file 7z tidak boleh kosong.${r}"
+					continue
+				fi
+
+				# kondisi jika file 7z tidak ditemukan
+				if [[ ! -f "${nama_file_7z}" ]]; then
+					echo -e "${m}[-] ${p}File 7z '${nama_file_7z}' tidak ditemukan.${r}"
+					continue
+				fi
+
+				# kondisi jika file bukan file 7z
+				if [[ "${nama_file_7z##*.}" != "7z" ]]; then
+					echo -e "${m}[-] ${p}File '${nama_file_7z}' bukan file 7z.${r}"
+					continue
+				fi
+
+				# kondisi jika file 7z ditemukan
+				echo -e "${h}[+] ${p}File 7z '${nama_file_7z}' ditemukan.${r}"
+				break
+			done
+
+			while true; do
+				read -p $'\e[1;37mMasukkan nama file hash dari file 7z: \e[1;33m' nama_file_hash_dari_file_7z_john
+				if [[ -z "${nama_file_hash_dari_file_7z_john}" ]]; then
+					echo -e "${m}[-] ${p}Nama file hash tidak boleh kosong.${r}"
+					continue
+				else
+					if [[ ! -f "${nama_file_hash_dari_file_7z_john}" ]]; then
+						echo -e "${m}[-] ${p}File hash '${nama_file_hash_dari_file_7z_john}' tidak ditemukan.${r}"
+						continue
+					else
+						if [[ $(cat "${nama_file_hash_dari_file_7z_john}" | grep -o "7z") ]]; then
+							echo -e "${h}[+] ${p}File hash '${nama_file_hash_dari_file_7z_john}' ditemukan.${r}"
+							while true; do
+								read -p $'\e[1;37mMasukkan nama file Wordlist: \e[1;33m' nama_file_wordlist_7z_john
+								if [[ -z "${nama_file_wordlist_7z_john}" ]]; then
+									echo -e "${m}[-] ${p}Nama file Wordlist tidak boleh kosong.${r}"
+									continue
+								else
+									if [[ ! -f "${nama_file_wordlist_7z_john}" ]]; then
+										echo -e "${m}[-] ${p}File Wordlist '${nama_file_wordlist_7z_john}' tidak ditemukan.${r}"
+										continue
+									else
+										path_7z_john="john"
+										pot_7z_john="pot_7z_john.txt"
+										echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_7z_john}' ditemukan.${r}"
+										read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
+										echo -e "${b}[*] ${p}Cracking kata sandi file 7z '${nama_file_7z}' dengan John...${r}"
+										crack_7z_john=$("${path_7z_john}" --wordlist="${nama_file_wordlist_7z_john}" --pot="${pot_7z_john}" "${target_hash_7z_john}" > /dev/null 2>&1)
+										show_result_crack_7z_john=$("${path_7z_john}" --show "${target_hash_7z_john}" --pot="${pot_7z_john}" > /dev/null 2>&1)
+										if [[ $(cat "${pot_7z_john}" | grep -o ":") ]]; then
+											kata_sandi_7z_john=$(cat "${pot_7z_john}" | cut -d ":" -f 2)
+											echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
+											echo -e "${h}[+] ${p}Kata sandi: ${h}${kata_sandi_7z_john}${r}"
+											rm "${pot_7z_john}"
+										else
+											echo -e "${m}[-] ${p}Kata sandi tidak ditemukan.${r}"
+											echo -e "${m}[-] ${p}Coba gunakan Wordlist yang lain.${r}"
+										fi
+										break
+									fi
+								fi
+							done
+						else
+							echo -e "${m}[-] ${p}Format hash file hash '${nama_file_hash_dari_file_7z_john}' tidak valid.${r}"
+							continue
+						fi
+					fi
+				fi
+				break
+			done
+
+
+		fi
+        	read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk kembali ke menu utama.\e[0m'
+
+
+	elif [[ "${pilih_menu}" == "9" ]]; then
+		target_hash_pdf_john="${nama_file_hash_file_pdf_john}"
+		if [[ -f "${target_hash_pdf_john}" ]]; then
+			echo -e "${b}[*] ${p}Pada sesi ini Anda sudah memiliki file hash dari file PDF '${nama_file_pdf}' (${h}${target_hash_pdf_john}${p}).${r}"
+			while true; do
+				read -p $'\e[1;37mApakah Anda ingin menggunakannya (iya/tidak): \e[1;33m' nanya_pdf_john
+				if [[ "${nanya_pdf_john}" == "iya" ]]; then
+					while true; do
+						read -p $'\e[1;37mMasukkan nama file Wordlist: \e[1;33m' nama_file_wordlist_pdf_john
+						if [[ -z "${nama_file_wordlist_pdf_john}" ]]; then
+							echo -e "${m}[-] ${p}Nama file Wordlist tidak boleh kosong.${r}"
+							continue
+						else
+							if [[ ! -f "${nama_file_wordlist_pdf_john}" ]]; then
+								echo -e "${m}[-] ${p}File Wordlist '${nama_file_wordlist_pdf_john}' tidak ditemukan.${r}"
+								continue
+							else
+								path_pdf_john="john"
+								pot_pdf_john="pot_pdf_john.txt"
+								echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_pdf_john}' ditemukan.${r}"
+								read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
+								echo -e "${b}[*] ${p}Cracking kata sandi file PDF '${nama_file_pdf}' dengan John...${r}"
+								crack_pdf_john=$("${path_pdf_john}" --wordlist="${nama_file_wordlist_pdf_john}" --pot="${pot_pdf_john}" "${target_hash_pdf_john}" > /dev/null 2>&1)
+								show_result_crack_pdf_john=$("${path_pdf_john}" --show "${target_hash_pdf_john}" --pot="${pot_pdf_john}" > /dev/null 2>&1)
+								if [[ $(cat "${pot_pdf_john}" | grep -o ":") ]]; then
+									kata_sandi_pdf_john=$(cat "${pot_pdf_john}" | cut -d ":" -f 2)
+									echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
+									echo -e "${h}[+] ${p}Kata sandi: ${h}${kata_sandi_pdf_john}${r}"
+									rm "${pot_pdf_john}"
+								else
+									echo -e "${m}[-] ${p}Kata sandi tidak ditemukan.${r}"
+									echo -e "${m}[-] ${p}Coba gunakan Wordlist yang lain.${r}"
+								fi
+								break
+							fi
+						fi
+					done
+					break
+				elif [[ "${nanya_pdf_john}" == "tidak" ]]; then
+					while true; do
+						read -p $'\e[1;37mMasukkan nama file hash dari file PDF: \e[1;33m' nama_file_hash_dari_file_pdf_john
+						if [[ -z "${nama_file_hash_dari_file_pdf_john}" ]]; then
+							echo -e "${m}[-] ${p}Nama file hash tidak boleh kosong.${r}"
+							continue
+						else
+							if [[ ! -f "${nama_file_hash_dari_file_pdf_john}" ]]; then
+								echo -e "${m}[-] ${p}File hash '${nama_file_hash_dari_file_pdf_john}' tidak ditemukan.${r}"
+								continue
+							else
+								if [[ $(cat "${nama_file_hash_dari_file_pdf_john}" | grep -o "pdf") ]]; then
+									echo -e "${h}[+] ${p}File hash '${nama_file_hash_dari_file_pdf_john}' ditemukan.${r}"
+									while true; do
+										read -p $'\e[1;37mMasukkan nama file Wordlist: \e[1;33m' nama_file_wordlist_pdf_john
+										if [[ -z "${nama_file_wordlist_pdf_john}" ]]; then
+											echo -e "${m}[-] ${p}Nama file Wordlist tidak boleh kosong.${r}"
+											continue
+										else
+											if [[ ! -f "${nama_file_wordlist_pdf_john}" ]]; then
+												echo -e "${m}[-] ${p}File Wordlist '${nama_file_wordlist_pdf_john}' tidak ditemukan.${r}"
+												continue
+											else
+												path_pdf_john="john"
+												pot_pdf_john="pot_pdf_john.txt"
+												echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_pdf_john}' ditemukan.${r}"
+												read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
+												echo -e "${b}[*] ${p}Cracking kata sandi file PDF '${nama_file_pdf}' dengan John...${r}"
+												crack_pdf_john=$("${path_pdf_john}" --wordlist="${nama_file_wordlist_pdf_john}" --pot="${pot_pdf_john}" "${target_hash_pdf_john}" > /dev/null 2>&1)
+												show_result_crack_pdf_john=$("${path_pdf_john}" --show "${target_hash_pdf_john}" --pot="${pot_pdf_john}" > /dev/null 2>&1)
+												if [[ $(cat "${pot_pdf_john}" | grep -o ":") ]]; then
+													kata_sandi_pdf_john=$(cat "${pot_pdf_john}" | cut -d ":" -f 2)
+													echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
+													echo -e "${h}[+] ${p}Kata sandi: ${h}${kata_sandi_pdf_john}${r}"
+													rm "${pot_pdf_john}"
+												else
+													echo -e "${m}[-] ${p}Kata sandi tidak ditemukan.${r}"
+													echo -e "${m}[-] ${p}Coba gunakan Wordlist yang lain.${r}"
+												fi
+												break
+											fi
+										fi
+									done
+								else
+									echo -e "${m}[-] ${p}Format hash file hash '{nama_file_hash_dari_file_pdf_john}' tidak valid.${r}"
+									continue
+								fi
+
+							fi
+						fi
+						break
+					done
+					break
+				fi
+			done
+
+		else
+
+
+			# memasukkan nama file pdf
+			while true; do
+				read -p $'\e[1;37mMasukkan nama file PDF: \e[1;33m' nama_file_pdf
+
+				# kondisi jika nama file pdf kosong
+				if [[ -z "${nama_file_pdf}" ]]; then
+					echo -e "${m}[-] ${p}Nama file PDF tidak boleh kosong.${r}"
+					continue
+				fi
+
+				# kondisi jika file pdf tidak ditemukan
+				if [[ ! -f "${nama_file_pdf}" ]]; then
+					echo -e "${m}[-] ${p}File PDF '${nama_file_pdf}' tidak ditemukan.${r}"
+					continue
+				fi
+
+				# kondisi jika file bukan file pdf
+				if [[ "${nama_file_pdf##*.}" != "pdf" ]]; then
+					echo -e "${m}[-] ${p}File '${nama_file_pdf}' bukan file PDF.${r}"
+					continue
+				fi
+
+				# kondisi jika file pdf ditemukan
+				echo -e "${h}[+] ${p}File PDF '${nama_file_pdf}' ditemukan.${r}"
+				break
+			done
+
+
+			while true; do
+				read -p $'\e[1;37mMasukkan nama file hash dari file PDF: \e[1;33m' nama_file_hash_dari_file_pdf_john
+				if [[ -z "${nama_file_hash_dari_file_pdf_john}" ]]; then
+					echo -e "${m}[-] ${p}Nama file hash tidak boleh kosong.${r}"
+					continue
+				else
+					if [[ ! -f "${nama_file_hash_dari_file_pdf_john}" ]]; then
+						echo -e "${m}[-] ${p}File hash '${nama_file_hash_dari_file_pdf_john}' tidak ditemukan.${r}"
+						continue
+					else
+						if [[ $(cat "${nama_file_hash_dari_file_pdf_john}" | grep -o "pdf") ]]; then
+							echo -e "${h}[+] ${p}File hash '${nama_file_hash_dari_file_pdf_john}' ditemukan.${r}"
+							while true; do
+								read -p $'\e[1;37mMasukkan nama file Wordlist: \e[1;33m' nama_file_wordlist_pdf_john
+								if [[ -z "${nama_file_wordlist_pdf_john}" ]]; then
+									echo -e "${m}[-] ${p}Nama file Wordlist tidak boleh kosong.${r}"
+									continue
+								else
+									if [[ ! -f "${nama_file_wordlist_pdf_john}" ]]; then
+										echo -e "${m}[-] ${p}File Wordlist '${nama_file_wordlist_pdf_john}' tidak ditemukan.${r}"
+										continue
+									else
+										path_pdf_john="john"
+										pot_pdf_john="pot_pdf_john.txt"
+										echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_pdf_john}' ditemukan.${r}"
+										read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
+										echo -e "${b}[*] ${p}Cracking kata sandi file PDF '${nama_file_pdf}' dengan John...${r}"
+										crack_pdf_john=$("${path_pdf_john}" --wordlist="${nama_file_wordlist_pdf_john}" --pot="${pot_pdf_john}" "${target_hash_pdf_john}" > /dev/null 2>&1)
+										show_result_crack_pdf_john=$("${path_pdf_john}" --show "${target_hash_pdf_john}" --pot="${pot_pdf_john}" > /dev/null 2>&1)
+										if [[ $(cat "${pot_pdf_john}" | grep -o ":") ]]; then
+											kata_sandi_pdf_john=$(cat "${pot_pdf_john}" | cut -d ":" -f 2)
+											echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
+											echo -e "${h}[+] ${p}Kata sandi: ${h}${kata_sandi_pdf_john}${r}"
+											rm "${pot_pdf_john}"
+										else
+											echo -e "${m}[-] ${p}Kata sandi tidak ditemukan.${r}"
+											echo -e "${m}[-] ${p}Coba gunakan Wordlist yang lain.${r}"
+										fi
+										break
+									fi
+								fi
+							done
+						else
+							echo -e "${m}[-] ${p}Format hash file hash '${nama_file_hash_dari_file_pdf_john}' tidak valid.${r}"
+							continue
+						fi
+					fi
+				fi
+				break
+			done
+
+
+		fi
+        	read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk kembali ke menu utama.\e[0m'
+
+	elif [[ "${pilih_menu}" == "10" ]]; then
+		target_hash_office_john="${nama_file_hash_file_office_john}"
+		if [[ -f "${target_hash_office_john}" ]]; then
+			echo -e "${b}[*] ${p}Pada sesi ini Anda sudah memiliki file hash dari file Office '${nama_file_office}' (${h}${target_hash_office_john}${p}).${r}"
+			while true; do
+				read -p $'\e[1;37mApakah Anda ingin menggunakannya (iya/tidak): \e[1;33m' nanya_office_john
+				if [[ "${nanya_office_john}" == "iya" ]]; then
+					while true; do
+						read -p $'\e[1;37mMasukkan nama file Wordlist: \e[1;33m' nama_file_wordlist_office_john
+						if [[ -z "${nama_file_wordlist_office_john}" ]]; then
+							echo -e "${m}[-] ${p}Nama file Wordlist tidak boleh kosong.${r}"
+							continue
+						else
+							if [[ ! -f "${nama_file_wordlist_office_john}" ]]; then
+								echo -e "${m}[-] ${p}File Wordlist '${nama_file_wordlist_office_john}' tidak ditemukan.${r}"
+								continue
+							else
+								path_office_john="john"
+								pot_office_john="pot_office_john.txt"
+								echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_office_john}' ditemukan.${r}"
+								read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
+								echo -e "${b}[*] ${p}Cracking kata sandi file Office '${nama_file_office}' dengan John...${r}"
+								crack_office_john=$("${path_office_john}" --wordlist="${nama_file_wordlist_office_john}" --pot="${pot_office_john}" "${target_hash_office_john}" > /dev/null 2>&1)
+								show_result_crack_office_john=$("${path_office_john}" --show "${target_hash_office_john}" --pot="${pot_office_john}" > /dev/null 2>&1)
+								if [[ $(cat "${pot_office_john}" | grep -o ":") ]]; then
+									kata_sandi_office_john=$(cat "${pot_office_john}" | cut -d ":" -f 2)
+									echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
+									echo -e "${h}[+] ${p}Kata sandi: ${h}${kata_sandi_office_john}${r}"
+									rm "${pot_office_john}"
+								else
+									echo -e "${m}[-] ${p}Kata sandi tidak ditemukan.${r}"
+									echo -e "${m}[-] ${p}Coba gunakan Wordlist yang lain.${r}"
+								fi
+								break
+							fi
+						fi
+					done
+					break
+				elif [[ "${nanya_office_john}" == "tidak" ]]; then
+					while true; do
+						read -p $'\e[1;37mMasukkan nama file hash dari file Office: \e[1;33m' nama_file_hash_dari_file_office_john
+						if [[ -z "${nama_file_hash_dari_file_office_john}" ]]; then
+							echo -e "${m}[-] ${p}Nama file hash tidak boleh kosong.${r}"
+							continue
+						else
+							if [[ ! -f "${nama_file_hash_dari_file_office_john}" ]]; then
+								echo -e "${m}[-] ${p}File hash '${nama_file_hash_dari_file_office_john}' tidak ditemukan.${r}"
+								continue
+							else
+								if [[ $(cat "${nama_file_hash_dari_file_office_john}" | grep -o "office") ]]; then
+									echo -e "${h}[+] ${p}File hash '${nama_file_hash_dari_file_office_john}' ditemukan.${r}"
+									while true; do
+										read -p $'\e[1;37mMasukkan nama file Wordlist: \e[1;33m' nama_file_wordlist_office_john
+										if [[ -z "${nama_file_wordlist_office_john}" ]]; then
+											echo -e "${m}[-] ${p}Nama file Wordlist tidak boleh kosong.${r}"
+											continue
+										else
+											if [[ ! -f "${nama_file_wordlist_office_john}" ]]; then
+												echo -e "${m}[-] ${p}File Wordlist '${nama_file_wordlist_office_john}' tidak ditemukan.${r}"
+												continue
+											else
+												path_office_john="john"
+												pot_office_john="pot_office_john.txt"
+												echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_office_john}' ditemukan.${r}"
+												read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
+												echo -e "${b}[*] ${p}Cracking kata sandi file Office '${nama_file_office}' dengan John...${r}"
+												crack_office_john=$("${path_office_john}" --wordlist="${nama_file_wordlist_office_john}" --pot="${pot_office_john}" "${target_hash_office_john}" > /dev/null 2>&1)
+												show_result_crack_office_john=$("${path_office_john}" --show "${target_hash_office_john}" --pot="${pot_office_john}" > /dev/null 2>&1)
+												if [[ $(cat "${pot_office_john}" | grep -o ":") ]]; then
+													kata_sandi_office_john=$(cat "${pot_office_john}" | cut -d ":" -f 2)
+													echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
+													echo -e "${h}[+] ${p}Kata sandi: ${h}${kata_sandi_office_john}${r}"
+													rm "${pot_office_john}"
+												else
+													echo -e "${m}[-] ${p}Kata sandi tidak ditemukan.${r}"
+													echo -e "${m}[-] ${p}Coba gunakan Wordlist yang lain.${r}"
+												fi
+												break
+											fi
+										fi
+									done
+								else
+									echo -e "${m}[-] ${p}Format hash file hash '{nama_file_hash_dari_file_office_john}' tidak valid.${r}"
+									continue
+								fi
+
+							fi
+						fi
+						break
+					done
+					break
+				fi
+			done
+
+		else
+
+
+			# memasukkan nama file office
+			while true; do
+				read -p $'\e[1;37mMasukkan nama file Office: \e[1;33m' nama_file_office
+
+				# kondisi jika nama file office kosong
+				if [[ -z "${nama_file_office}" ]]; then
+					echo -e "${m}[-] ${p}Nama file Office tidak boleh kosong.${r}"
+					continue
+				fi
+
+				# kondisi jika file office tidak ditemukan
+				if [[ ! -f "${nama_file_office}" ]]; then
+					echo -e "${m}[-] ${p}File Office '${nama_file_office}' tidak ditemukan.${r}"
+					continue
+				fi
+
+				# kondisi jika file bukan file office
+				if [[ "${nama_file_office##*.}" != "docx" && "${nama_file_office##*.}" != "xlsx" && "${nama_file_office##*.}" != "pptx" ]]; then
+					echo -e "${m}[-] ${p}File '${nama_file_office}' bukan file Office.${r}"
+					continue
+				fi
+
+				# kondisi jika file office ditemukan
+				echo -e "${h}[+] ${p}File Office '${nama_file_office}' ditemukan.${r}"
+				break
+			done
+
+
+			while true; do
+				read -p $'\e[1;37mMasukkan nama file hash dari file Office: \e[1;33m' nama_file_hash_dari_file_office_john
+				if [[ -z "${nama_file_hash_dari_file_office_john}" ]]; then
+					echo -e "${m}[-] ${p}Nama file hash tidak boleh kosong.${r}"
+					continue
+				else
+					if [[ ! -f "${nama_file_hash_dari_file_office_john}" ]]; then
+						echo -e "${m}[-] ${p}File hash '${nama_file_hash_dari_file_office_john}' tidak ditemukan.${r}"
+						continue
+					else
+						if [[ $(cat "${nama_file_hash_dari_file_office_john}" | grep -o "office") ]]; then
+							echo -e "${h}[+] ${p}File hash '${nama_file_hash_dari_file_office_john}' ditemukan.${r}"
+							while true; do
+								read -p $'\e[1;37mMasukkan nama file Wordlist: \e[1;33m' nama_file_wordlist_office_john
+								if [[ -z "${nama_file_wordlist_office_john}" ]]; then
+									echo -e "${m}[-] ${p}Nama file Wordlist tidak boleh kosong.${r}"
+									continue
+								else
+									if [[ ! -f "${nama_file_wordlist_office_john}" ]]; then
+										echo -e "${m}[-] ${p}File Wordlist '${nama_file_wordlist_office_john}' tidak ditemukan.${r}"
+										continue
+									else
+										path_office_john="john"
+										pot_office_john="pot_office_john.txt"
+										echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_office_john}' ditemukan.${r}"
+										read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
+										echo -e "${b}[*] ${p}Cracking kata sandi file Office '${nama_file_office}' dengan John...${r}"
+										crack_office_john=$("${path_office_john}" --wordlist="${nama_file_wordlist_office_john}" --pot="${pot_office_john}" "${target_hash_office_john}" > /dev/null 2>&1)
+										show_result_crack_office_john=$("${path_office_john}" --show "${target_hash_office_john}" --pot="${pot_office_john}" > /dev/null 2>&1)
+										if [[ $(cat "${pot_office_john}" | grep -o ":") ]]; then
+											kata_sandi_office_john=$(cat "${pot_office_john}" | cut -d ":" -f 2)
+											echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
+											echo -e "${h}[+] ${p}Kata sandi: ${h}${kata_sandi_office_john}${r}"
+											rm "${pot_office_john}"
+										else
+											echo -e "${m}[-] ${p}Kata sandi tidak ditemukan.${r}"
+											echo -e "${m}[-] ${p}Coba gunakan Wordlist yang lain.${r}"
+										fi
+										break
+									fi
+								fi
+							done
+						else
+							echo -e "${m}[-] ${p}Format hash file hash '${nama_file_hash_dari_file_office_john}' tidak valid.${r}"
+							continue
+						fi
+					fi
+				fi
+				break
+			done
+
+
+		fi
+        	read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk kembali ke menu utama.\e[0m'
+
 	else
 		echo -e "${m}[-] ${p}Menu '${pilih_menu}' tidak tersedia. Silahkan pilih kembali..${r}"
 		echo ""
