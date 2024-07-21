@@ -140,6 +140,7 @@ while true; do
 			fi
 
 			# kondisi jika file zip ditemukan
+                        echo ""
 			echo -e "${h}[+] ${p}File ZIP '${nama_file_zip}' ditemukan.${r}"
 
 			# mengekstrak hash file zip ke format john
@@ -231,6 +232,7 @@ while true; do
 			fi
 
 			# kondisi jika file rar ditemukan
+                        echo ""
 			echo -e "${h}[+] ${p}File RAR '${nama_file_rar}' ditemukan.${r}"
 
 			# mengekstrak hash file rar ke format john
@@ -322,6 +324,7 @@ while true; do
 			fi
 
 			# kondisi jika file 7z ditemukan
+                        echo ""
 			echo -e "${h}[+] ${p}File 7z '${nama_file_7z}' ditemukan.${r}"
 
 			# mengekstrak hash file 7z ke format john
@@ -415,6 +418,7 @@ while true; do
 			fi
 
 			# kondisi jika file pdf ditemukan
+                        echo ""
 			echo -e "${h}[+] ${p}File PDF '${nama_file_pdf}' ditemukan.${r}"
 
 			# mengekstrak hash file pdf ke format john
@@ -506,6 +510,7 @@ while true; do
 			fi
 
 			# kondisi jika file office ditemukan
+                        echo ""
 			echo -e "${h}[+] ${p}File Office '${nama_file_office}' ditemukan.${r}"
 
 			# mengekstrak hash file office ke format john
