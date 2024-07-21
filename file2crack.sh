@@ -35,22 +35,6 @@ if [[ ! -d "${path}" ]]; then
         mkdir -p "${path}"
 fi
 
-# cek alat zip2john
-if ! command -v zip2john &> /dev/null; do
-        while true; do
-                read -p $'\e[1;37mMasukkan path ke jalur alat zip2john: \e[1;33m' cek_zip2john
-	        if [[ ! -f "${cek_zip2john}" ]]; then
-                        echo -e "${m}[-] ${p}Alat zip2john tidak ditemukan.${r}"
-			continue
-                else
-		        path_zip2john="${cek_zip2john}"
-	                break
-                fi
-        done
-else
-        path_zip2john="zip2john"
-fi
-
 # daftar menu yang tersedia
 daftar_menu=(
 	"Keluar"
@@ -96,6 +80,23 @@ while true; do
 	elif [[ "${pilih_menu}" == "0" ]]; then
 		exit 0
 	elif [[ "${pilih_menu}" == "1" ]]; then
+
+                # cek alat zip2john
+                if ! command -v zip2john >> /dev/null 2>&1; then
+                        while true; do
+                                read -p $'\e[1;37mMasukkan path ke jalur alat zip2john: \e[1;33m' cek_zip2john
+	                        if [[ ! -f "${cek_zip2john}" ]]; then
+                                        echo -e "${m}[-] ${p}Alat zip2john tidak ditemukan.${r}"
+			                continue
+                                else
+		                        path_zip2john="${cek_zip2john}"
+	                                break
+                                fi
+                        done
+                else
+                        path_zip2john="zip2john"
+                fi
+
 		# memasukkan nama file zip
 		while true; do
 			read -p $'\e[1;37mMasukkan nama file ZIP: \e[1;33m' nama_file_zip
