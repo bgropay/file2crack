@@ -702,8 +702,8 @@ while true; do
 										echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_zip_john}' ditemukan.${r}"
 										read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 										echo -e "${b}[*] ${p}Cracking kata sandi file ZIP '${nama_file_zip}' dengan John...${r}"
-										crack_zip_john=$("${path_zip_john}" --wordlist="${nama_file_wordlist_zip_john}" --pot="${pot_zip_john}" "${target_hash_zip_john}" > /dev/null 2>&1)
-										show_result_crack_zip_john=$("${path_zip_john}" --show "${target_hash_zip_john}" --pot="${pot_zip_john}" > /dev/null 2>&1)
+										crack_zip_john=$("${path_zip_john}" --wordlist="${nama_file_wordlist_zip_john}" --pot="${pot_zip_john}" "${nama_file_hash_dari_file_zip_john}" > /dev/null 2>&1)
+										show_result_crack_zip_john=$("${path_zip_john}" --show "${nama_file_hash_dari_file_zip_john}" --pot="${pot_zip_john}" > /dev/null 2>&1)
 										if [[ $(cat "${pot_zip_john}" | grep -o ":") ]]; then
 											kata_sandi_zip_john=$(cat "${pot_zip_john}" | cut -d ":" -f 2)
 											echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
@@ -882,8 +882,8 @@ while true; do
 										echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_rar_john}' ditemukan.${r}"
 										read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 										echo -e "${b}[*] ${p}Cracking kata sandi file RAR '${nama_file_rar}' dengan John...${r}"
-										crack_rar_john=$("${path_rar_john}" --wordlist="${nama_file_wordlist_rar_john}" --pot="${pot_rar_john}" "${target_hash_rar_john}" > /dev/null 2>&1)
-										show_result_crack_rar_john=$("${path_rar_john}" --show "${target_hash_rar_john}" --pot="${pot_rar_john}" > /dev/null 2>&1)
+										crack_rar_john=$("${path_rar_john}" --wordlist="${nama_file_wordlist_rar_john}" --pot="${pot_rar_john}" "${nama_file_hash_dari_file_rar_john}" > /dev/null 2>&1)
+										show_result_crack_rar_john=$("${path_rar_john}" --show "${nama_file_hash_dari_file_rar_john}" --pot="${pot_rar_john}" > /dev/null 2>&1)
 										if [[ $(cat "${pot_rar_john}" | grep -o ":") ]]; then
 											kata_sandi_rar_john=$(cat "${pot_rar_john}" | cut -d ":" -f 2)
 											echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
@@ -1061,8 +1061,8 @@ while true; do
 										echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_7z_john}' ditemukan.${r}"
 										read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 										echo -e "${b}[*] ${p}Cracking kata sandi file 7z '${nama_file_7z}' dengan John...${r}"
-										crack_7z_john=$("${path_7z_john}" --wordlist="${nama_file_wordlist_7z_john}" --pot="${pot_7z_john}" "${target_hash_7z_john}" > /dev/null 2>&1)
-										show_result_crack_7z_john=$("${path_7z_john}" --show "${target_hash_7z_john}" --pot="${pot_7z_john}" > /dev/null 2>&1)
+										crack_7z_john=$("${path_7z_john}" --wordlist="${nama_file_wordlist_7z_john}" --pot="${pot_7z_john}" "${nama_file_hash_dari_file_7z_john}" > /dev/null 2>&1)
+										show_result_crack_7z_john=$("${path_7z_john}" --show "${nama_file_hash_dari_file_7z_john}" --pot="${pot_7z_john}" > /dev/null 2>&1)
 										if [[ $(cat "${pot_7z_john}" | grep -o ":") ]]; then
 											kata_sandi_7z_john=$(cat "${pot_7z_john}" | cut -d ":" -f 2)
 											echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
@@ -1242,8 +1242,8 @@ while true; do
 										echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_pdf_john}' ditemukan.${r}"
 										read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 										echo -e "${b}[*] ${p}Cracking kata sandi file PDF '${nama_file_pdf}' dengan John...${r}"
-										crack_pdf_john=$("${path_pdf_john}" --wordlist="${nama_file_wordlist_pdf_john}" --pot="${pot_pdf_john}" "${target_hash_pdf_john}" > /dev/null 2>&1)
-										show_result_crack_pdf_john=$("${path_pdf_john}" --show "${target_hash_pdf_john}" --pot="${pot_pdf_john}" > /dev/null 2>&1)
+										crack_pdf_john=$("${path_pdf_john}" --wordlist="${nama_file_wordlist_pdf_john}" --pot="${pot_pdf_john}" "${nama_file_hash_dari_file_pdf_john}" > /dev/null 2>&1)
+										show_result_crack_pdf_john=$("${path_pdf_john}" --show "${nama_file_hash_dari_file_pdf_john}" --pot="${pot_pdf_john}" > /dev/null 2>&1)
 										if [[ $(cat "${pot_pdf_john}" | grep -o ":") ]]; then
 											kata_sandi_pdf_john=$(cat "${pot_pdf_john}" | cut -d ":" -f 2)
 											echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
@@ -1422,8 +1422,8 @@ while true; do
 										echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_office_john}' ditemukan.${r}"
 										read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 										echo -e "${b}[*] ${p}Cracking kata sandi file Office '${nama_file_office}' dengan John...${r}"
-										crack_office_john=$("${path_office_john}" --wordlist="${nama_file_wordlist_office_john}" --pot="${pot_office_john}" "${target_hash_office_john}" > /dev/null 2>&1)
-										show_result_crack_office_john=$("${path_office_john}" --show "${target_hash_office_john}" --pot="${pot_office_john}" > /dev/null 2>&1)
+										crack_office_john=$("${path_office_john}" --wordlist="${nama_file_wordlist_office_john}" --pot="${pot_office_john}" "${nama_file_hash_dari_file_office_john}" > /dev/null 2>&1)
+										show_result_crack_office_john=$("${path_office_john}" --show "${nama_file_hash_dari_file_office_john}" --pot="${pot_office_john}" > /dev/null 2>&1)
 										if [[ $(cat "${pot_office_john}" | grep -o ":") ]]; then
 											kata_sandi_office_john=$(cat "${pot_office_john}" | cut -d ":" -f 2)
 											echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
