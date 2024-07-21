@@ -42,7 +42,7 @@ daftar_menu=(
 	"Ekstrak hash file RAR"
 	"Ekstrak hash file 7z"
 	"Ekstrak hash file PDF"
-	"Ekstrak hash file Offcie (docx, xlsx, pptx)"
+	"Ekstrak hash file Office (docx, xlsx, pptx)"
 	"Tentang"
 )
 
@@ -307,7 +307,7 @@ while true; do
 				fi
 			else
 				echo -e "${m}[-] ${p}Gagal mengekstrak hash file 7z '${nama_file_7z}' ke format John.${r}"
-				exit1
+				exit 1
 			fi
 
 			# mengekstrak hash file 7z ke format hashcat
