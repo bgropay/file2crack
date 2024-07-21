@@ -1,0 +1,5 @@
+[bug]
+
+[ sedang diperbaiki ]
+1. Pada saat langsung masuk ke menu crack kata sandi, file pot john nya not found
+  
