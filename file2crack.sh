@@ -126,7 +126,7 @@ while true; do
 			# mengekstrak hash file zip ke format john
 			echo -e "${b}[*] ${p}Mengekstrak hash file ZIP '${nama_file_zip}' ke format John ...${r}"
 			sleep 3
-			hash_file_zip_john=$(zip2john "${nama_file_zip}" 2>/dev/null)
+			hash_file_zip_john=$("${path_zip2john}" "${nama_file_zip}" 2>/dev/null)
                         base=$(basename "${nama_file_zip}")
 			nama_file_hash_file_zip_john="${path}/${base}.john"
 			echo "${hash_file_zip_john}" > "${nama_file_hash_file_zip_john}"
@@ -143,7 +143,7 @@ while true; do
 			# mengekstrak hash file zip ke format hashcat
 			echo -e "${b}[*] ${p}Mengekstrak hash file ZIP '${nama_file_zip}' ke format Hashcat${i}${r}"
 			sleep 3
-			hash_file_zip_hashcat=$(zip2john "${nama_file_zip}" 2>/dev/null | cut -d ":" -f 2 | tr -d "[:space:]")
+			hash_file_zip_hashcat=$("${path_zip2john}" "${nama_file_zip}" 2>/dev/null | cut -d ":" -f 2 | tr -d "[:space:]")
                         base=$(basename "${nama_file_zip}")
 			nama_file_hash_file_zip_hashcat="${path}/${base}.hashcat"
 			echo "${hash_file_zip_hashcat}" > "${nama_file_hash_file_zip_hashcat}"
@@ -162,6 +162,23 @@ while true; do
 			break
 		done
 	elif [[ "${pilih_menu}" == "2" ]]; then
+
+                # cek alat rar2john
+                if ! command -v rar2john >> /dev/null 2>&1; then
+                        while true; do
+                                read -p $'\e[1;37mMasukkan path ke jalur alat rar2john: \e[1;33m' cek_rar2john
+	                        if [[ ! -f "${cek_rar2john}" ]]; then
+                                        echo -e "${m}[-] ${p}Alat rar2john tidak ditemukan.${r}"
+			                continue
+                                else
+		                        path_rar2john="${cek_rar2john}"
+	                                break
+                                fi
+                        done
+                else
+                        path_rar2john="rar2john"
+                fi
+
 		# memasukkan nama file rar
 		while true; do
 			read -p $'\e[1;37mMasukkan nama file RAR: \e[1;33m' nama_file_rar
@@ -191,7 +208,7 @@ while true; do
 			# mengekstrak hash file rar ke format john
 			echo -e "${b}[*] ${p}Mengekstrak hash file RAR '${nama_file_rar}' ke format John ...${r}"
 			sleep 3
-			hash_file_rar_john=$(rar2john "${nama_file_rar}" 2>/dev/null)
+			hash_file_rar_john=$("${path_rar2john}" "${nama_file_rar}" 2>/dev/null)
                         base_rar_john=$(basename "${nama_file_rar}")
 			nama_file_hash_file_rar_john="${path}/${base_rar_john}.john"
 			echo "${hash_file_rar_john}" > "${nama_file_hash_file_rar_john}"
@@ -208,7 +225,7 @@ while true; do
 			# mengekstrak hash file rar ke format hashcat
 			echo -e "${b}[*] ${p}Mengekstrak hash file RAR '${nama_file_rar}' ke format Hashcat ...${r}"
 			sleep 3
-			hash_file_rar_hashcat=$(rar2john "${nama_file_rar}" 2>/dev/null | cut -d ":" -f 2 | tr -d "[:space:]")
+			hash_file_rar_hashcat=$("${path_rar2john}" "${nama_file_rar}" 2>/dev/null | cut -d ":" -f 2 | tr -d "[:space:]")
                         base_rar_hashcat=$(basename "${nama_file_rar}")
 			nama_file_hash_file_rar_hashcat="${path}/${base_rar_hashcat}.hashcat"
 			echo "${hash_file_rar_hashcat}" > "${nama_file_hash_file_rar_hashcat}"
@@ -227,6 +244,23 @@ while true; do
 			break
 		done
 	elif [[ "${pilih_menu}" == "3" ]]; then
+
+                # cek alat 7z2john
+                if ! command -v 7z2john >> /dev/null 2>&1; then
+                        while true; do
+                                read -p $'\e[1;37mMasukkan path ke jalur alat 7z2john: \e[1;33m' cek_7z2john
+	                        if [[ ! -f "${cek_7z2john}" ]]; then
+                                        echo -e "${m}[-] ${p}Alat 7z2john tidak ditemukan.${r}"
+			                continue
+                                else
+		                        path_7z2john="${cek_7z2john}"
+	                                break
+                                fi
+                        done
+                else
+                        path_7z2john="7z2john"
+                fi
+
 		# memasukkan nama file 7z
 		while true; do
 			read -p $'\e[1;37mMasukkan nama file 7z: \e[1;33m' nama_file_7z
@@ -256,7 +290,7 @@ while true; do
 			# mengekstrak hash file 7z ke format john
 			echo -e "${b}[*] ${p}Mengekstrak hash file 7z '${nama_file_7z}' ke format John ...${r}"
 			sleep 3
-			hash_file_7z_john=$(7z2john "${nama_file_7z}" 2>/dev/null)
+			hash_file_7z_john=$("${path_7z2john}" "${nama_file_7z}" 2>/dev/null)
                         base_7z_john=$(basename "${nama_file_7z}")
 			nama_file_hash_file_7z_john="${path}/${base_7z_john}.john"
 			echo "${hash_file_7z_john}" > "${nama_file_hash_file_7z_john}"
@@ -273,7 +307,7 @@ while true; do
 			# mengekstrak hash file 7z ke format hashcat
 			echo -e "${b}[*] ${p}Mengekstrak hash file 7z '${nama_file_7z}' ke format Hashcat ...${r}"
 			sleep 3
-			hash_file_7z_hashcat=$(7z2john "${nama_file_7z}" 2>/dev/null | cut -d ":" -f 2 | tr -d "[:space:]")
+			hash_file_7z_hashcat=$("${path_7z2john}" "${nama_file_7z}" 2>/dev/null | cut -d ":" -f 2 | tr -d "[:space:]")
                         base_7z_hashcat=$(basename "${input_file_7z}")
 			nama_file_hash_file_7z_hashcat="${path}/${base_7z_hashcat}.hashcat"
 			echo "${hash_file_7z_hashcat}" > "${nama_file_hash_file_7z_hashcat}"
@@ -292,6 +326,23 @@ while true; do
 			break
 		done
 	elif [[ "${pilih_menu}" == "4" ]]; then
+
+                # cek alat pdf2john
+                if ! command -v pdf2john >> /dev/null 2>&1; then
+                        while true; do
+                                read -p $'\e[1;37mMasukkan path ke jalur alat pdf2john: \e[1;33m' cek_pdf2john
+	                        if [[ ! -f "${cek_pdf2john}" ]]; then
+                                        echo -e "${m}[-] ${p}Alat pdf2john tidak ditemukan.${r}"
+			                continue
+                                else
+		                        path_pdf2john="${cek_pdf2john}"
+	                                break
+                                fi
+                        done
+                else
+                        path_pdf2john="pdf2john"
+                fi
+
 		# memasukkan nama file pdf
 		while true; do
 			read -p $'\e[1;37mMasukkan nama file PDF: \e[1;33m' nama_file_pdf
@@ -321,7 +372,7 @@ while true; do
 			# mengekstrak hash file pdf ke format john
 			echo -e "${b}[*] ${p}Mengekstrak hash file PDF '${nama_file_pdf}' ke format John ...${r}"
 			sleep 3
-			hash_file_pdf_john=$(pdf2john "${nama_file_pdf}" 2>/dev/null)
+			hash_file_pdf_john=$("${path_pdf2john}" "${nama_file_pdf}" 2>/dev/null)
                         base_pdf_john=$(basename "${nama_file_pdf}")
 			nama_file_hash_file_pdf_john="${path}/${base_pdf_john}.john"
 			echo "${hash_file_pdf_john}" > "${nama_file_hash_file_pdf_john}"
@@ -338,7 +389,7 @@ while true; do
 			# mengekstrak hash file pdf ke format hashcat
 			echo -e "${b}[*] ${p}Mengekstrak hash file PDF '${nama_file_pdf}' ke format Hashcat ...${r}"
 			sleep 3
-			hash_file_pdf_hashcat=$(pdf2john "${nama_file_pdf}" 2>/dev/null | cut -d ":" -f 2 | tr -d "[:space:]")
+			hash_file_pdf_hashcat=$("${path_pdf2john}" "${nama_file_pdf}" 2>/dev/null | cut -d ":" -f 2 | tr -d "[:space:]")
                         base_7z_hashcat=$(basename "${nama_file_7z}")
 			nama_file_hash_file_pdf_hashcat="${path}/${base_7z_hashcat}.hashcat"
 			echo "${hash_file_pdf_hashcat}" > "${nama_file_hash_file_pdf_hashcat}"
@@ -357,6 +408,23 @@ while true; do
 			break
 		done
 	elif [[ "${pilih_menu}" == "5" ]]; then
+
+                # cek alat office2john
+                if ! command -v office2john >> /dev/null 2>&1; then
+                        while true; do
+                                read -p $'\e[1;37mMasukkan path ke jalur alat office2john: \e[1;33m' cek_office2john
+	                        if [[ ! -f "${cek_office2john}" ]]; then
+                                        echo -e "${m}[-] ${p}Alat office2john tidak ditemukan.${r}"
+			                continue
+                                else
+		                        path_office2john="${cek_office2john}"
+	                                break
+                                fi
+                        done
+                else
+                        path_office2john="office2john"
+                fi
+
 		# memasukkan nama file office
 		while true; do
 			read -p $'\e[1;37mMasukkan nama file Office (docx, xlsx, pptx): \e[1;33m' nama_file_office
@@ -386,7 +454,7 @@ while true; do
 			# mengekstrak hash file office ke format john
 			echo -e "${b}[*] ${p}Mengekstrak hash file Office '${nama_file_office}' ke format John ...${r}"
 			sleep 3
-			hash_file_office_john=$(office2john "${nama_file_office}" 2>/dev/null)
+			hash_file_office_john=$("${path_office2john}" "${nama_file_office}" 2>/dev/null)
                         base_office_john=$(basename "${nama_file_office}")
 			nama_file_hash_file_office_john="${path}/${base_office_john}.john"
 			echo "${hash_file_office_john}" > "${nama_file_hash_file_office_john}"
@@ -403,7 +471,7 @@ while true; do
 			# mengekstrak hash file office ke format hashcat
 			echo -e "${b}[*] ${p}Mengekstrak hash file Office '${nama_file_office}' ke format Hashcat ...${r}"
 			sleep 3
-			hash_file_office_hashcat=$(office2john "${nama_file_office}" 2>/dev/null | cut -d ":" -f 2 | tr -d "[:space:]")
+			hash_file_office_hashcat=$("${path_office2john}" "${nama_file_office}" 2>/dev/null | cut -d ":" -f 2 | tr -d "[:space:]")
                         base_office_hashcat=$(basename "${nama_file_office}")
 			nama_file_hash_file_office_hashcat="${path}/${base_office_hashcat}.hashcat"
 			echo "${hash_file_office_hashcat}" > "${nama_file_hash_file_office_hashcat}"
