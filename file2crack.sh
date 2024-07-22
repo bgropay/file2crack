@@ -101,22 +101,6 @@ while true; do
 		exit 0
 	elif [[ "${pilih_menu}" == "1" ]]; then
 
-                # cek alat zip2john
-                if ! command -v zip2john >> /dev/null 2>&1; then
-                        while true; do
-                                read -p $'\e[1;37mMasukkan path ke jalur alat zip2john: \e[1;33m' cek_zip2john
-	                        if [[ ! -f "${cek_zip2john}" ]]; then
-                                        echo -e "${m}[-] ${p}Alat zip2john tidak ditemukan.${r}"
-			                continue
-                                else
-		                        path_zip2john="${cek_zip2john}"
-	                                break
-                                fi
-                        done
-                else
-                        path_zip2john="zip2john"
-                fi
-
 		# memasukkan nama file zip
 		while true; do
 			read -p $'\e[1;37mMasukkan nama file ZIP: \e[1;33m' nama_file_zip
@@ -145,7 +129,7 @@ while true; do
 			# mengekstrak hash file zip ke format john
 			echo -e "${b}[*] ${p}Mengekstrak hash file ZIP '${nama_file_zip}' ke format John ...${r}"
 			sleep 3
-			hash_file_zip_john=$("${path_zip2john}" "${nama_file_zip}" 2>/dev/null)
+			hash_file_zip_john=$(zip2john "${nama_file_zip}" 2>/dev/null)
                         base=$(basename "${nama_file_zip}")
 			nama_file_hash_file_zip_john="${path}/${base}.john"
 			echo "${hash_file_zip_john}" > "${nama_file_hash_file_zip_john}"
@@ -167,7 +151,7 @@ while true; do
 			# mengekstrak hash file zip ke format hashcat
 			echo -e "${b}[*] ${p}Mengekstrak hash file ZIP '${nama_file_zip}' ke format Hashcat ...${r}"
 			sleep 3
-			hash_file_zip_hashcat=$("${path_zip2john}" "${nama_file_zip}" 2>/dev/null | cut -d ":" -f 2 | tr -d "[:space:]")
+			hash_file_zip_hashcat=$(zip2john "${nama_file_zip}" 2>/dev/null | cut -d ":" -f 2 | tr -d "[:space:]")
                         base=$(basename "${nama_file_zip}")
 			nama_file_hash_file_zip_hashcat="${path}/${base}.hashcat"
 			echo "${hash_file_zip_hashcat}" > "${nama_file_hash_file_zip_hashcat}"
@@ -190,22 +174,6 @@ while true; do
 			break
 		done
 	elif [[ "${pilih_menu}" == "2" ]]; then
-
-                # cek alat rar2john
-                if ! command -v rar2john >> /dev/null 2>&1; then
-                        while true; do
-                                read -p $'\e[1;37mMasukkan path ke jalur alat rar2john: \e[1;33m' cek_rar2john
-	                        if [[ ! -f "${cek_rar2john}" ]]; then
-                                        echo -e "${m}[-] ${p}Alat rar2john tidak ditemukan.${r}"
-			                continue
-                                else
-		                        path_rar2john="${cek_rar2john}"
-	                                break
-                                fi
-                        done
-                else
-                        path_rar2john="rar2john"
-                fi
 
 		# memasukkan nama file rar
 		while true; do
@@ -235,7 +203,7 @@ while true; do
 			# mengekstrak hash file rar ke format john
 			echo -e "${b}[*] ${p}Mengekstrak hash file RAR '${nama_file_rar}' ke format John ...${r}"
 			sleep 3
-			hash_file_rar_john=$("${path_rar2john}" "${nama_file_rar}" 2>/dev/null)
+			hash_file_rar_john=$(rar2john "${nama_file_rar}" 2>/dev/null)
                         base_rar_john=$(basename "${nama_file_rar}")
 			nama_file_hash_file_rar_john="${path}/${base_rar_john}.john"
 			echo "${hash_file_rar_john}" > "${nama_file_hash_file_rar_john}"
@@ -257,7 +225,7 @@ while true; do
 			# mengekstrak hash file rar ke format hashcat
 			echo -e "${b}[*] ${p}Mengekstrak hash file RAR '${nama_file_rar}' ke format Hashcat ...${r}"
 			sleep 3
-			hash_file_rar_hashcat=$("${path_rar2john}" "${nama_file_rar}" 2>/dev/null | cut -d ":" -f 2 | tr -d "[:space:]")
+			hash_file_rar_hashcat=$(rar2john "${nama_file_rar}" 2>/dev/null | cut -d ":" -f 2 | tr -d "[:space:]")
                         base_rar_hashcat=$(basename "${nama_file_rar}")
 			nama_file_hash_file_rar_hashcat="${path}/${base_rar_hashcat}.hashcat"
 			echo "${hash_file_rar_hashcat}" > "${nama_file_hash_file_rar_hashcat}"
@@ -280,22 +248,6 @@ while true; do
 			break
 		done
 	elif [[ "${pilih_menu}" == "3" ]]; then
-
-                # cek alat 7z2john
-                if ! command -v 7z2john >> /dev/null 2>&1; then
-                        while true; do
-                                read -p $'\e[1;37mMasukkan path ke jalur alat 7z2john: \e[1;33m' cek_7z2john
-	                        if [[ ! -f "${cek_7z2john}" ]]; then
-                                        echo -e "${m}[-] ${p}Alat 7z2john tidak ditemukan.${r}"
-			                continue
-                                else
-		                        path_7z2john="${cek_7z2john}"
-	                                break
-                                fi
-                        done
-                else
-                        path_7z2john="7z2john"
-                fi
 
 		# memasukkan nama file 7z
 		while true; do
@@ -325,7 +277,7 @@ while true; do
 			# mengekstrak hash file 7z ke format john
 			echo -e "${b}[*] ${p}Mengekstrak hash file 7z '${nama_file_7z}' ke format John ...${r}"
 			sleep 3
-			hash_file_7z_john=$("${path_7z2john}" "${nama_file_7z}" 2>/dev/null)
+			hash_file_7z_john=$(7z2john "${nama_file_7z}" 2>/dev/null)
                         base_7z_john=$(basename "${nama_file_7z}")
 			nama_file_hash_file_7z_john="${path}/${base_7z_john}.john"
 			echo "${hash_file_7z_john}" > "${nama_file_hash_file_7z_john}"
@@ -348,7 +300,7 @@ while true; do
 			# mengekstrak hash file 7z ke format hashcat
 			echo -e "${b}[*] ${p}Mengekstrak hash file 7z '${nama_file_7z}' ke format Hashcat ...${r}"
 			sleep 3
-			hash_file_7z_hashcat=$("${path_7z2john}" "${nama_file_7z}" 2>/dev/null | cut -d ":" -f 2 | tr -d "[:space:]")
+			hash_file_7z_hashcat=$(7z2john "${nama_file_7z}" 2>/dev/null | cut -d ":" -f 2 | tr -d "[:space:]")
 	                base_7z_hashcat=$(basename "${nama_file_7z}")
 			nama_file_hash_file_7z_hashcat="${path}/${base_7z_hashcat}.hashcat"
 			echo "${hash_file_7z_hashcat}" > "${nama_file_hash_file_7z_hashcat}"
@@ -372,22 +324,6 @@ while true; do
 			break
 		done
 	elif [[ "${pilih_menu}" == "4" ]]; then
-
-                # cek alat pdf2john
-                if ! command -v pdf2john >> /dev/null 2>&1; then
-                        while true; do
-                                read -p $'\e[1;37mMasukkan path ke jalur alat pdf2john: \e[1;33m' cek_pdf2john
-	                        if [[ ! -f "${cek_pdf2john}" ]]; then
-                                        echo -e "${m}[-] ${p}Alat pdf2john tidak ditemukan.${r}"
-			                continue
-                                else
-		                        path_pdf2john="${cek_pdf2john}"
-	                                break
-                                fi
-                        done
-                else
-                        path_pdf2john="pdf2john"
-                fi
 
 		# memasukkan nama file pdf
 		while true; do
@@ -417,7 +353,7 @@ while true; do
 			# mengekstrak hash file pdf ke format john
 			echo -e "${b}[*] ${p}Mengekstrak hash file PDF '${nama_file_pdf}' ke format John ...${r}"
 			sleep 3
-			hash_file_pdf_john=$("${path_pdf2john}" "${nama_file_pdf}" 2>/dev/null)
+			hash_file_pdf_john=$(pdf2john "${nama_file_pdf}" 2>/dev/null)
                         base_pdf_john=$(basename "${nama_file_pdf}")
 			nama_file_hash_file_pdf_john="${path}/${base_pdf_john}.john"
 			echo "${hash_file_pdf_john}" > "${nama_file_hash_file_pdf_john}"
@@ -439,7 +375,7 @@ while true; do
 			# mengekstrak hash file pdf ke format hashcat
 			echo -e "${b}[*] ${p}Mengekstrak hash file PDF '${nama_file_pdf}' ke format Hashcat ...${r}"
 			sleep 3
-			hash_file_pdf_hashcat=$("${path_pdf2john}" "${nama_file_pdf}" 2>/dev/null | cut -d ":" -f 2 | tr -d "[:space:]")
+			hash_file_pdf_hashcat=$(pdf2john "${nama_file_pdf}" 2>/dev/null | cut -d ":" -f 2 | tr -d "[:space:]")
                         base_pdf_hashcat=$(basename "${nama_file_pdf}")
 			nama_file_hash_file_pdf_hashcat="${path}/${base_pdf_hashcat}.hashcat"
 			echo "${hash_file_pdf_hashcat}" > "${nama_file_hash_file_pdf_hashcat}"
@@ -462,22 +398,6 @@ while true; do
 			break
 		done
 	elif [[ "${pilih_menu}" == "5" ]]; then
-
-                # cek alat office2john
-                if ! command -v office2john >> /dev/null 2>&1; then
-                        while true; do
-                                read -p $'\e[1;37mMasukkan path ke jalur alat office2john: \e[1;33m' cek_office2john
-	                        if [[ ! -f "${cek_office2john}" ]]; then
-                                        echo -e "${m}[-] ${p}Alat office2john tidak ditemukan.${r}"
-			                continue
-                                else
-		                        path_office2john="${cek_office2john}"
-	                                break
-                                fi
-                        done
-                else
-                        path_office2john="office2john"
-                fi
 
 		# memasukkan nama file office
 		while true; do
@@ -507,7 +427,7 @@ while true; do
 			# mengekstrak hash file office ke format john
 			echo -e "${b}[*] ${p}Mengekstrak hash file Office '${nama_file_office}' ke format John ...${r}"
 			sleep 3
-			hash_file_office_john=$("${path_office2john}" "${nama_file_office}" 2>/dev/null)
+			hash_file_office_john=$(office2john "${nama_file_office}" 2>/dev/null)
                         base_office_john=$(basename "${nama_file_office}")
 			nama_file_hash_file_office_john="${path}/${base_office_john}.john"
 			echo "${hash_file_office_john}" > "${nama_file_hash_file_office_john}"
@@ -529,7 +449,7 @@ while true; do
 			# mengekstrak hash file office ke format hashcat
 			echo -e "${b}[*] ${p}Mengekstrak hash file Office '${nama_file_office}' ke format Hashcat ...${r}"
 			sleep 3
-			hash_file_office_hashcat=$("${path_office2john}" "${nama_file_office}" 2>/dev/null | cut -d ":" -f 2 | tr -d "[:space:]")
+			hash_file_office_hashcat=$(office2john "${nama_file_office}" 2>/dev/null | cut -d ":" -f 2 | tr -d "[:space:]")
                         base_office_hashcat=$(basename "${nama_file_office}")
 			nama_file_hash_file_office_hashcat="${path}/${base_office_hashcat}.hashcat"
 			echo "${hash_file_office_hashcat}" > "${nama_file_hash_file_office_hashcat}"
@@ -568,13 +488,11 @@ while true; do
 								echo -e "${m}[-] ${p}File Wordlist '${nama_file_wordlist_zip_john}' tidak ditemukan.${r}"
 								continue
 							else
-								path_zip_john="john"
 								pot_zip_john="pot_zip_john.txt"
 								echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_zip_john}' ditemukan.${r}"
 								read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 								echo -e "${b}[*] ${p}Cracking kata sandi file ZIP '${nama_file_zip}' dengan John...${r}"
-								crack_zip_john=$("${path_zip_john}" --wordlist="${nama_file_wordlist_zip_john}" --pot="${pot_zip_john}" "${target_hash_zip_john}" > /dev/null 2>&1)
-								show_result_crack_zip_john=$("${path_zip_john}" --show "${target_hash_zip_john}" --pot="${pot_zip_john}" > /dev/null 2>&1)
+								john --wordlist="${nama_file_wordlist_zip_john}" --pot="${pot_zip_john}" "${target_hash_zip_john}" > /dev/null 2>&1
 								if [[ $(cat "${pot_zip_john}" | grep -o ":") ]]; then
 									kata_sandi_zip_john=$(cat "${pot_zip_john}" | cut -d ":" -f 2)
 									echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
@@ -612,13 +530,11 @@ while true; do
 												echo -e "${m}[-] ${p}File Wordlist '${nama_file_wordlist_zip_john}' tidak ditemukan.${r}"
 												continue
 											else
-												path_zip_john="john"
 												pot_zip_john="pot_zip_john.txt"
 												echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_zip_john}' ditemukan.${r}"
 												read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 												echo -e "${b}[*] ${p}Cracking kata sandi file ZIP '${nama_file_zip}' dengan John...${r}"
-												crack_zip_john=$("${path_zip_john}" --wordlist="${nama_file_wordlist_zip_john}" --pot="${pot_zip_john}" "${target_hash_zip_john}" > /dev/null 2>&1)
-												show_result_crack_zip_john=$("${path_zip_john}" --show "${target_hash_zip_john}" --pot="${pot_zip_john}" > /dev/null 2>&1)
+												john --wordlist="${nama_file_wordlist_zip_john}" --pot="${pot_zip_john}" "${target_hash_zip_john}" > /dev/null 2>&1
 												if [[ $(cat "${pot_zip_john}" | grep -o ":") ]]; then
 													kata_sandi_zip_john=$(cat "${pot_zip_john}" | cut -d ":" -f 2)
 													echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
@@ -697,13 +613,11 @@ while true; do
 										echo -e "${m}[-] ${p}File Wordlist '${nama_file_wordlist_zip_john}' tidak ditemukan.${r}"
 										continue
 									else
-										path_zip_john="john"
 										pot_zip_john="pot_zip_john.txt"
 										echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_zip_john}' ditemukan.${r}"
 										read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 										echo -e "${b}[*] ${p}Cracking kata sandi file ZIP '${nama_file_zip}' dengan John...${r}"
-										crack_zip_john=$("${path_zip_john}" --wordlist="${nama_file_wordlist_zip_john}" --pot="${pot_zip_john}" "${nama_file_hash_dari_file_zip_john}" > /dev/null 2>&1)
-										show_result_crack_zip_john=$("${path_zip_john}" --show "${nama_file_hash_dari_file_zip_john}" --pot="${pot_zip_john}" > /dev/null 2>&1)
+										john --wordlist="${nama_file_wordlist_zip_john}" --pot="${pot_zip_john}" "${nama_file_hash_dari_file_zip_john}" > /dev/null 2>&1
 										if [[ $(cat "${pot_zip_john}" | grep -o ":") ]]; then
 											kata_sandi_zip_john=$(cat "${pot_zip_john}" | cut -d ":" -f 2)
 											echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
@@ -747,13 +661,11 @@ while true; do
 								echo -e "${m}[-] ${p}File Wordlist '${nama_file_wordlist_rar_john}' tidak ditemukan.${r}"
 								continue
 							else
-								path_rar_john="john"
 								pot_rar_john="pot_rar_john.txt"
 								echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_rar_john}' ditemukan.${r}"
 								read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 								echo -e "${b}[*] ${p}Cracking kata sandi file RAR '${nama_file_rar}' dengan John...${r}"
-								crack_rar_john=$("${path_rar_john}" --wordlist="${nama_file_wordlist_rar_john}" --pot="${pot_rar_john}" "${target_hash_rar_john}" > /dev/null 2>&1)
-								show_result_crack_rar_john=$("${path_rar_john}" --show "${target_hash_rar_john}" --pot="${pot_rar_john}" > /dev/null 2>&1)
+								john --wordlist="${nama_file_wordlist_rar_john}" --pot="${pot_rar_john}" "${target_hash_rar_john}" > /dev/null 2>&1
 								if [[ $(cat "${pot_rar_john}" | grep -o ":") ]]; then
 									kata_sandi_rar_john=$(cat "${pot_rar_john}" | cut -d ":" -f 2)
 									echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
@@ -791,13 +703,11 @@ while true; do
 												echo -e "${m}[-] ${p}File Wordlist '${nama_file_wordlist_rar_john}' tidak ditemukan.${r}"
 												continue
 											else
-												path_rar_john="john"
 												pot_rar_john="pot_rar_john.txt"
 												echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_rar_john}' ditemukan.${r}"
 												read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 												echo -e "${b}[*] ${p}Cracking kata sandi file RAR '${nama_file_rar}' dengan John...${r}"
-												crack_rar_john=$("${path_rar_john}" --wordlist="${nama_file_wordlist_rar_john}" --pot="${pot_rar_john}" "${target_hash_rar_john}" > /dev/null 2>&1)
-												show_result_crack_rar_john=$("${path_rar_john}" --show "${target_hash_rar_john}" --pot="${pot_rar_john}" > /dev/null 2>&1)
+												john --wordlist="${nama_file_wordlist_rar_john}" --pot="${pot_rar_john}" "${target_hash_rar_john}" > /dev/null 2>&1
 												if [[ $(cat "${pot_rar_john}" | grep -o ":") ]]; then
 													kata_sandi_rar_john=$(cat "${pot_rar_john}" | cut -d ":" -f 2)
 													echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
@@ -877,13 +787,11 @@ while true; do
 										echo -e "${m}[-] ${p}File Wordlist '${nama_file_wordlist_rar_john}' tidak ditemukan.${r}"
 										continue
 									else
-										path_rar_john="john"
 										pot_rar_john="pot_rar_john.txt"
 										echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_rar_john}' ditemukan.${r}"
 										read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 										echo -e "${b}[*] ${p}Cracking kata sandi file RAR '${nama_file_rar}' dengan John...${r}"
-										crack_rar_john=$("${path_rar_john}" --wordlist="${nama_file_wordlist_rar_john}" --pot="${pot_rar_john}" "${nama_file_hash_dari_file_rar_john}" > /dev/null 2>&1)
-										show_result_crack_rar_john=$("${path_rar_john}" --show "${nama_file_hash_dari_file_rar_john}" --pot="${pot_rar_john}" > /dev/null 2>&1)
+										john --wordlist="${nama_file_wordlist_rar_john}" --pot="${pot_rar_john}" "${nama_file_hash_dari_file_rar_john}" > /dev/null 2>&1
 										if [[ $(cat "${pot_rar_john}" | grep -o ":") ]]; then
 											kata_sandi_rar_john=$(cat "${pot_rar_john}" | cut -d ":" -f 2)
 											echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
@@ -927,13 +835,11 @@ while true; do
 								echo -e "${m}[-] ${p}File Wordlist '${nama_file_wordlist_7z_john}' tidak ditemukan.${r}"
 								continue
 							else
-								path_7z_john="john"
 								pot_7z_john="pot_7z_john.txt"
 								echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_7z_john}' ditemukan.${r}"
 								read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 								echo -e "${b}[*] ${p}Cracking kata sandi file 7z '${nama_file_7z}' dengan John...${r}"
-								crack_7z_john=$("${path_7z_john}" --wordlist="${nama_file_wordlist_7z_john}" --pot="${pot_7z_john}" "${target_hash_7z_john}" > /dev/null 2>&1)
-								show_result_crack_7z_john=$("${path_7z_john}" --show "${target_hash_7z_john}" --pot="${pot_7z_john}" > /dev/null 2>&1)
+								john --wordlist="${nama_file_wordlist_7z_john}" --pot="${pot_7z_john}" "${target_hash_7z_john}" > /dev/null 2>&1
 								if [[ $(cat "${pot_7z_john}" | grep -o ":") ]]; then
 									kata_sandi_7z_john=$(cat "${pot_7z_john}" | cut -d ":" -f 2)
 									echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
@@ -971,13 +877,11 @@ while true; do
 												echo -e "${m}[-] ${p}File Wordlist '${nama_file_wordlist_7z_john}' tidak ditemukan.${r}"
 												continue
 											else
-												path_7z_john="john"
 												pot_7z_john="pot_7z_john.txt"
 												echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_7z_john}' ditemukan.${r}"
 												read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 												echo -e "${b}[*] ${p}Cracking kata sandi file 7z '${nama_file_7z}' dengan John...${r}"
-												crack_7z_john=$("${path_7z_john}" --wordlist="${nama_file_wordlist_7z_john}" --pot="${pot_7z_john}" "${target_hash_7z_john}" > /dev/null 2>&1)
-												show_result_crack_7z_john=$("${path_7z_john}" --show "${target_hash_7z_john}" --pot="${pot_7z_john}" > /dev/null 2>&1)
+												john --wordlist="${nama_file_wordlist_7z_john}" --pot="${pot_7z_john}" "${target_hash_7z_john}" > /dev/null 2>&1
 												if [[ $(cat "${pot_7z_john}" | grep -o ":") ]]; then
 													kata_sandi_7z_john=$(cat "${pot_7z_john}" | cut -d ":" -f 2)
 													echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
@@ -1056,13 +960,11 @@ while true; do
 										echo -e "${m}[-] ${p}File Wordlist '${nama_file_wordlist_7z_john}' tidak ditemukan.${r}"
 										continue
 									else
-										path_7z_john="john"
 										pot_7z_john="pot_7z_john.txt"
 										echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_7z_john}' ditemukan.${r}"
 										read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 										echo -e "${b}[*] ${p}Cracking kata sandi file 7z '${nama_file_7z}' dengan John...${r}"
-										crack_7z_john=$("${path_7z_john}" --wordlist="${nama_file_wordlist_7z_john}" --pot="${pot_7z_john}" "${nama_file_hash_dari_file_7z_john}" > /dev/null 2>&1)
-										show_result_crack_7z_john=$("${path_7z_john}" --show "${nama_file_hash_dari_file_7z_john}" --pot="${pot_7z_john}" > /dev/null 2>&1)
+										john --wordlist="${nama_file_wordlist_7z_john}" --pot="${pot_7z_john}" "${nama_file_hash_dari_file_7z_john}" > /dev/null 2>&1
 										if [[ $(cat "${pot_7z_john}" | grep -o ":") ]]; then
 											kata_sandi_7z_john=$(cat "${pot_7z_john}" | cut -d ":" -f 2)
 											echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
@@ -1107,13 +1009,11 @@ while true; do
 								echo -e "${m}[-] ${p}File Wordlist '${nama_file_wordlist_pdf_john}' tidak ditemukan.${r}"
 								continue
 							else
-								path_pdf_john="john"
 								pot_pdf_john="pot_pdf_john.txt"
 								echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_pdf_john}' ditemukan.${r}"
 								read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 								echo -e "${b}[*] ${p}Cracking kata sandi file PDF '${nama_file_pdf}' dengan John...${r}"
-								crack_pdf_john=$("${path_pdf_john}" --wordlist="${nama_file_wordlist_pdf_john}" --pot="${pot_pdf_john}" "${target_hash_pdf_john}" > /dev/null 2>&1)
-								show_result_crack_pdf_john=$("${path_pdf_john}" --show "${target_hash_pdf_john}" --pot="${pot_pdf_john}" > /dev/null 2>&1)
+								john --wordlist="${nama_file_wordlist_pdf_john}" --pot="${pot_pdf_john}" "${target_hash_pdf_john}" > /dev/null 2>&1
 								if [[ $(cat "${pot_pdf_john}" | grep -o ":") ]]; then
 									kata_sandi_pdf_john=$(cat "${pot_pdf_john}" | cut -d ":" -f 2)
 									echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
@@ -1151,13 +1051,11 @@ while true; do
 												echo -e "${m}[-] ${p}File Wordlist '${nama_file_wordlist_pdf_john}' tidak ditemukan.${r}"
 												continue
 											else
-												path_pdf_john="john"
 												pot_pdf_john="pot_pdf_john.txt"
 												echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_pdf_john}' ditemukan.${r}"
 												read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 												echo -e "${b}[*] ${p}Cracking kata sandi file PDF '${nama_file_pdf}' dengan John...${r}"
-												crack_pdf_john=$("${path_pdf_john}" --wordlist="${nama_file_wordlist_pdf_john}" --pot="${pot_pdf_john}" "${target_hash_pdf_john}" > /dev/null 2>&1)
-												show_result_crack_pdf_john=$("${path_pdf_john}" --show "${target_hash_pdf_john}" --pot="${pot_pdf_john}" > /dev/null 2>&1)
+												john --wordlist="${nama_file_wordlist_pdf_john}" --pot="${pot_pdf_john}" "${target_hash_pdf_john}" > /dev/null 2>&1
 												if [[ $(cat "${pot_pdf_john}" | grep -o ":") ]]; then
 													kata_sandi_pdf_john=$(cat "${pot_pdf_john}" | cut -d ":" -f 2)
 													echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
@@ -1237,13 +1135,11 @@ while true; do
 										echo -e "${m}[-] ${p}File Wordlist '${nama_file_wordlist_pdf_john}' tidak ditemukan.${r}"
 										continue
 									else
-										path_pdf_john="john"
 										pot_pdf_john="pot_pdf_john.txt"
 										echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_pdf_john}' ditemukan.${r}"
 										read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 										echo -e "${b}[*] ${p}Cracking kata sandi file PDF '${nama_file_pdf}' dengan John...${r}"
-										crack_pdf_john=$("${path_pdf_john}" --wordlist="${nama_file_wordlist_pdf_john}" --pot="${pot_pdf_john}" "${nama_file_hash_dari_file_pdf_john}" > /dev/null 2>&1)
-										show_result_crack_pdf_john=$("${path_pdf_john}" --show "${nama_file_hash_dari_file_pdf_john}" --pot="${pot_pdf_john}" > /dev/null 2>&1)
+										john --wordlist="${nama_file_wordlist_pdf_john}" --pot="${pot_pdf_john}" "${nama_file_hash_dari_file_pdf_john}" > /dev/null 2>&1
 										if [[ $(cat "${pot_pdf_john}" | grep -o ":") ]]; then
 											kata_sandi_pdf_john=$(cat "${pot_pdf_john}" | cut -d ":" -f 2)
 											echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
@@ -1287,13 +1183,11 @@ while true; do
 								echo -e "${m}[-] ${p}File Wordlist '${nama_file_wordlist_office_john}' tidak ditemukan.${r}"
 								continue
 							else
-								path_office_john="john"
 								pot_office_john="pot_office_john.txt"
 								echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_office_john}' ditemukan.${r}"
 								read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 								echo -e "${b}[*] ${p}Cracking kata sandi file Office '${nama_file_office}' dengan John...${r}"
-								crack_office_john=$("${path_office_john}" --wordlist="${nama_file_wordlist_office_john}" --pot="${pot_office_john}" "${target_hash_office_john}" > /dev/null 2>&1)
-								show_result_crack_office_john=$("${path_office_john}" --show "${target_hash_office_john}" --pot="${pot_office_john}" > /dev/null 2>&1)
+								john --wordlist="${nama_file_wordlist_office_john}" --pot="${pot_office_john}" "${target_hash_office_john}" > /dev/null 2>&1
 								if [[ $(cat "${pot_office_john}" | grep -o ":") ]]; then
 									kata_sandi_office_john=$(cat "${pot_office_john}" | cut -d ":" -f 2)
 									echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
@@ -1331,13 +1225,11 @@ while true; do
 												echo -e "${m}[-] ${p}File Wordlist '${nama_file_wordlist_office_john}' tidak ditemukan.${r}"
 												continue
 											else
-												path_office_john="john"
 												pot_office_john="pot_office_john.txt"
 												echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_office_john}' ditemukan.${r}"
 												read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 												echo -e "${b}[*] ${p}Cracking kata sandi file Office '${nama_file_office}' dengan John...${r}"
-												crack_office_john=$("${path_office_john}" --wordlist="${nama_file_wordlist_office_john}" --pot="${pot_office_john}" "${target_hash_office_john}" > /dev/null 2>&1)
-												show_result_crack_office_john=$("${path_office_john}" --show "${target_hash_office_john}" --pot="${pot_office_john}" > /dev/null 2>&1)
+												john --wordlist="${nama_file_wordlist_office_john}" --pot="${pot_office_john}" "${target_hash_office_john}" > /dev/null 2>&1
 												if [[ $(cat "${pot_office_john}" | grep -o ":") ]]; then
 													kata_sandi_office_john=$(cat "${pot_office_john}" | cut -d ":" -f 2)
 													echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
@@ -1417,13 +1309,11 @@ while true; do
 										echo -e "${m}[-] ${p}File Wordlist '${nama_file_wordlist_office_john}' tidak ditemukan.${r}"
 										continue
 									else
-										path_office_john="john"
 										pot_office_john="pot_office_john.txt"
 										echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_office_john}' ditemukan.${r}"
 										read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 										echo -e "${b}[*] ${p}Cracking kata sandi file Office '${nama_file_office}' dengan John...${r}"
-										crack_office_john=$("${path_office_john}" --wordlist="${nama_file_wordlist_office_john}" --pot="${pot_office_john}" "${nama_file_hash_dari_file_office_john}" > /dev/null 2>&1)
-										show_result_crack_office_john=$("${path_office_john}" --show "${nama_file_hash_dari_file_office_john}" --pot="${pot_office_john}" > /dev/null 2>&1)
+										john --wordlist="${nama_file_wordlist_office_john}" --pot="${pot_office_john}" "${nama_file_hash_dari_file_office_john}" > /dev/null 2>&1
 										if [[ $(cat "${pot_office_john}" | grep -o ":") ]]; then
 											kata_sandi_office_john=$(cat "${pot_office_john}" | cut -d ":" -f 2)
 											echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
