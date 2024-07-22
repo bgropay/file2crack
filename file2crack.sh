@@ -56,6 +56,22 @@ daftar_menu=(
 	"Tentang"
 )
 
+clear
+
+echo "Selamat datang di file2crack"
+echo ""
+echo "file2crack adalah sebuah program Bash sederhana yang dirancang untuk melakukan cracking"
+echo "kata sandi file ZIP, RAR, 7Z, PDF, dan file office (docx, xlsx, pptx)."
+echo ""
+echo "Peringatan"
+echo ""
+echo "Program ini dibuat semata-mata hanya untuk tujuan edukasi dan pembelajaran saja. Tidak"
+echo "niatan atau maksud mendorong kegiatan yang melanggar hukum (ilegal). Gunakan program ini"
+echo "hanya pada file yang kalian miliki saja. Pembuat (bgropay) tidak bertanggung jawab atas"
+echo "penyalahgunaan program ini. Terimakasih."
+echo ""
+read -p "Tekan [Enter] untuk melanjutkan..."
+
 while true; do
 
 	# membersihkan layar terminmal
