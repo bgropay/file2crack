@@ -152,16 +152,14 @@ while true; do
 
 			if [[ -f "${nama_file_hash_file_zip_john}" ]]; then
 				# kondisi jika isi file hash file zip john kosong
-				if [[ ! -s "${nama_file_hash_file_zip_john}" ]]; then
-					echo -e "${m}[-] ${p}Gagal mengekstrak hash file ZIP '${nama_file_zip}' ke format John.${r}"
-					exit 1
+				if [[ $(cat "${nama_file_hash_file_zip_john}" | grep -o "zip" || cat "${nama_file_hash_file_zip_john}" | grep -o "pkzip") ]]; then
+					echo -e "${h}[+] ${p}Berhasil mengekstrak hash file ZIP '${nama_file_zip}' ke format John.${r}"
 				# kondisi jika isi file hash file zip john tidak kosong
 				else
-					echo -e "${h}[+] ${p}Berhasil mengekstrak hash file ZIP '${nama_file_zip}' ke format John.${r}"
+					echo -e "${m}[-] ${p}Gagal mengekstrak hash file ZIP '${nama_file_zip}' ke format John.${r}"
 				fi
 			else
 				echo -e "${m}[-] ${p}Gagal mengekstrak hash file ZIP '${nama_file_zip}' ke format John.${r}"
-				exit 1
 			fi
 
 			# mengekstrak hash file zip ke format hashcat
@@ -173,17 +171,15 @@ while true; do
 			echo "${hash_file_zip_hashcat}" > "${nama_file_hash_file_zip_hashcat}"
 
 			if [[ -f "${nama_file_hash_file_zip_hashcat}" ]]; then
-				# kondisi jika isi file hash file zip hashcat kosong
-				if [[ ! -s "${nama_file_hash_file_zip_hashcat}" ]]; then
-					echo -e "${m}[-] ${p}Gagal mengekstrak hash file ZIP '${nama_file_zip}' ke format Hashcat.${r}"
-					exit 1
 				# kondisi jika isi file hash file zip hashcat tidak kosong
-				else
+				if [[ $(cat "${nama_file_hash_file_zip_hashcat}" | grep -o "zip" || cat "${nama_file_hash_file_zip_hashcat}" | grep -o "pkzip") ]]; then
 					echo -e "${h}[+] ${p}Berhasil mengekstrak hash file ZIP '${nama_file_zip}' ke format Hashcat.${r}"
+				# kondisi jika isi file hash file zip hashcat kosong
+				else
+					echo -e "${m}[-] ${p}Gagal mengekstrak hash file ZIP '${nama_file_zip}' ke format Hashcat.${r}"
 				fi
 			else
 				echo -e "${m}[-] ${p}Gagal mengekstrak hash file ZIP '${nama_file_zip}' ke format Hashcat.${r}"
-				exit 1
 			fi
 
 			read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk kembali ke menu utama.\e[0m'
@@ -225,17 +221,15 @@ while true; do
 			echo "${hash_file_rar_john}" > "${nama_file_hash_file_rar_john}"
 
 			if [[ -f "${nama_file_hash_file_rar_john}" ]]; then
-				# kondisi jika isi file hash file rar john kosong
-				if [[ ! -s "${nama_file_hash_file_rar_john}" ]]; then
-					echo -e "${m}[-] ${p}Gagal mengekstrak hash file RAR '${nama_file_rar}' ke format John.${r}"
-					exit 1
 				# kondisi jika isi file hash file rar john tidak kosong
-				else
+				if [[ $(cat "${nama_file_hash_file_rar_john}" | grep -o "rar5") ]]; then
 					echo -e "${h}[+] ${p}Berhasil mengekstrak hash file RAR '${nama_file_rar}' ke format John.${r}"
+				# kondisi jika isi file hash file rar john kosong
+				else
+					echo -e "${m}[-] ${p}Gagal mengekstrak hash file RAR '${nama_file_rar}' ke format John.${r}"
 				fi
 			else
 				echo -e "${m}[-] ${p}Gagal mengekstrak hash file RAR '${nama_file_rar}' ke format John.${r}"
-				exit 1
 			fi
 
 			# mengekstrak hash file rar ke format hashcat
@@ -248,16 +242,14 @@ while true; do
 
 			if [[ -f "${nama_file_hash_file_rar_hashcat}" ]]; then
 				# kondisi jika isi file hash file rar hashcat kosong
-				if [[ ! -s "${nama_file_hash_file_rar_hashcat}" ]]; then
-					echo -e "${m}[-] ${p}Gagal mengekstrak hash file RAR '${nama_file_rar}' ke format Hashcat.${r}"
-					exit 1
+				if [[ $(cat "${nama_file_hash_file_rar_hashcat}" | grep -o "rar5") ]]; then
+					echo -e "${h}[+] ${p}Berhasil mengekstrak hash file RAR '${nama_file_rar}' ke format Hashcat.${r}"
 				# kondisi jika isi file hash file rar hashcat tidak kosong
 				else
-					echo -e "${h}[+] ${p}Berhasil mengekstrak hash file RAR '${nama_file_rar}' ke format Hashcat.${r}"
+					echo -e "${m}[-] ${p}Gagal mengekstrak hash file RAR '${nama_file_rar}' ke format Hashcat.${r}"
 				fi
 			else
 				echo -e "${m}[-] ${p}Gagal mengekstrak hash file RAR '${nama_file_rar}' ke format Hashcat.${r}"
-				exit 1
 			fi
 
 			read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk kembali ke menu utama.\e[0m'
@@ -300,17 +292,15 @@ while true; do
 
 
 			if [[ -f "${nama_file_hash_file_7z_john}" ]]; then
-				# kondisi jika isi file hash file 7z john kosong
-				if [[ ! -s "${nama_file_hash_file_7z_john}" ]]; then
-					echo -e "${m}[-] ${p}Gagal mengekstrak hash file 7z '${nama_file_7z}' ke format John.${r}"
-					exit 1
 				# kondisi jika isi file hash file 7z john tidak kosong
-				else
+				if [[ $(cat "${nama_file_hash_file_7z_john}" | grep -o "7z") ]]; then
 					echo -e "${h}[+] ${p}Berhasil mengekstrak hash file 7z '${nama_file_7z}' ke format John.${r}"
+				# kondisi jika isi file hash file 7z john kosong
+				else
+					echo -e "${m}[-] ${p}Gagal mengekstrak hash file 7z '${nama_file_7z}' ke format John.${r}"
 				fi
 			else
 				echo -e "${m}[-] ${p}Gagal mengekstrak hash file 7z '${nama_file_7z}' ke format John.${r}"
-				exit 1
 			fi
 
 			# mengekstrak hash file 7z ke format hashcat
@@ -322,18 +312,16 @@ while true; do
 			echo "${hash_file_7z_hashcat}" > "${nama_file_hash_file_7z_hashcat}"
 
 			if [[ -f "${nama_file_hash_file_7z_hashcat}" ]]; then
-				# kondisi jika isi file hash file 7z hashcat kosong
-				if [[ ! -s "${nama_file_hash_file_7z_hashcat}" ]]; then
-					echo -e "${m}[-] ${p}Gagal mengekstrak hash file 7z '${nama_file_7z}' ke format Hashcat.${r}"
-					exit 1
-
 				# kondisi jika isi file hash file 7z hashcat tidak kosong
-				else
+				if [[ $(cat "${nama_file_hash_file_7z_hashcat}" | grep -o "7z") ]]; then
 					echo -e "${h}[+] ${p}Berhasil mengekstrak hash file 7z '${nama_file_7z}' ke format Hashcat.${r}"
+
+				# kondisi jika isi file hash file 7z hashcat kosong
+				else
+					echo -e "${m}[-] ${p}Gagal mengekstrak hash file 7z '${nama_file_7z}' ke format Hashcat.${r}"
 				fi
 			else
 				echo -e "${m}[-] ${p}Gagal mengekstrak hash file 7z '${nama_file_7z}' ke format Hashcat.${r}"
-                                exit 1
 			fi
 
 			read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk kembali ke menu utama.\e[0m'
@@ -375,17 +363,15 @@ while true; do
 			echo "${hash_file_pdf_john}" > "${nama_file_hash_file_pdf_john}"
 
 			if [[ -f "${nama_file_hash_file_pdf_john}" ]]; then
-				# kondisi jika isi file hash file pdf john kosong
-				if [[ ! -s "${nama_file_hash_file_pdf_john}" ]]; then
-					echo -e "${m}[-] ${p}Gagal mengekstrak hash file PDF '${nama_file_pdf}' ke format John.${r}"
-					exit 1
 				# kondisi jika isi file hash file pdf john tidak kosong
-				else
+				if [[ $(cat "${nama_file_hash_file_pdf_john}" | grep -o "pdf") ]]; then
 					echo -e "${h}[+] ${p}Berhasil mengekstrak hash file PDF '${nama_file_pdf}' ke format John.${r}"
+				# kondisi jika isi file hash file pdf john kosong
+				else
+					echo -e "${m}[-] ${p}Gagal mengekstrak hash file PDF '${nama_file_pdf}' ke format John.${r}"
 				fi
 			else
 				echo -e "${m}[-] ${p}Gagal mengekstrak hash file PDF '${nama_file_pdf}' ke format John.${r}"
-				exit 1
 			fi
 
 			# mengekstrak hash file pdf ke format hashcat
@@ -397,17 +383,15 @@ while true; do
 			echo "${hash_file_pdf_hashcat}" > "${nama_file_hash_file_pdf_hashcat}"
 
 			if [[ -f "${nama_file_hash_file_pdf_hashcat}" ]]; then
-				# kondisi jika isi file hash file pdf hashcat kosong
-				if [[ ! -s "${nama_file_hash_file_pdf_hashcat}" ]]; then
-					echo -e "${m}[-] ${p}Gagal mengekstrak hash file PDF '${nama_file_pdf}' ke format Hashcat.${r}"
-					exit 1
 				# kondisi jika isi file hash file pdf hashcat tidak kosong
-				else
+				if [[ $(cat "${nama_file_hash_file_pdf_hashcat}" | grep -o "pdf") ]]; then
 					echo -e "${h}[+] ${p}Berhasil mengekstrak hash file PDF '${nama_file_pdf}' ke format Hashcat.${r}"
+				# kondisi jika isi file hash file pdf hashcat kosong
+				else
+					echo -e "${m}[-] ${p}Gagal mengekstrak hash file PDF '${nama_file_pdf}' ke format Hashcat.${r}"
 				fi
 			else
 				echo -e "${m}[-] ${p}Gagal mengekstrak hash file PDF '${nama_file_pdf}' ke format Hashcat.${r}"
-				exit 1
 			fi
 
 			read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk kembali ke menu utama.\e[0m'
@@ -449,17 +433,15 @@ while true; do
 			echo "${hash_file_office_john}" > "${nama_file_hash_file_office_john}"
 
 			if [[ -f "${nama_file_hash_file_office_john}" ]]; then
-				# kondisi jika isi file hash file office john kosong
-				if [[ ! -s "${nama_file_hash_file_office_john}" ]]; then
-					echo -e "${m}[-] ${p}Gagal mengekstrak hash file Office '${nama_file_office}' ke format John.${r}"
-					exit 1
 				# kondisi jika isi file hash file office john tidak kosong
-				else
+				if [[ $(cat "${nama_file_hash_file_office_john}" | grep -o "office") ]]; then
 					echo -e "${h}[+] ${p}Berhasil mengekstrak hash file Office '${nama_file_office}' ke format John.${r}"
+				# kondisi jika isi file hash file office john kosong
+				else
+					echo -e "${m}[-] ${p}Gagal mengekstrak hash file Office '${nama_file_office}' ke format John.${r}"
 				fi
 			else
 				echo -e "${m}[-] ${p}Gagal mengekstrak hash file Office '${nama_file_office}' ke format John.${r}"
-				exit 1
 			fi
 
 			# mengekstrak hash file office ke format hashcat
@@ -471,17 +453,15 @@ while true; do
 			echo "${hash_file_office_hashcat}" > "${nama_file_hash_file_office_hashcat}"
 
 			if [[ -f "${nama_file_hash_file_office_hashcat}" ]]; then
-				# kondisi jika isi file hash file office hashcat kosong
-				if [[ ! -s "${nama_file_hash_file_office_hashcat}" ]]; then
-					echo -e "${m}[-] ${p}Gagal mengekstrak hash file Office '${nama_file_office}' ke format Hashcat.${r}"
-					exit 1
 				# kondisi jika isi file hash file office hashcat tidak kosong
-				else
+				if [[ $(cat "${nama_file_hash_file_office_hashcat}" | grep -o "office") ]]; then
 					echo -e "${h}[+] ${p}Berhasil mengekstrak hash file Office '${nama_file_office}' ke format Hashcat.${r}"
+				# kondisi jika isi file hash file office hashcat kosong
+				else
+					echo -e "${m}[-] ${p}Gagal mengekstrak hash file Office '${nama_file_office}' ke format Hashcat.${r}"
 				fi
 			else
 				echo -e "${m}[-] ${p}Gagal mengekstrak hash file Office '${nama_file_office}' ke format Hashcat.${r}"
-				exit 1
 			fi
 
 			read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk kembali ke menu utama.\e[0m'
