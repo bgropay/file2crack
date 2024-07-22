@@ -58,19 +58,19 @@ daftar_menu=(
 
 clear
 
-echo "Selamat datang di file2crack"
-echo ""
-echo "file2crack adalah sebuah program Bash sederhana yang dirancang untuk melakukan cracking"
-echo "kata sandi file ZIP, RAR, 7Z, PDF, dan file office (docx, xlsx, pptx)."
-echo ""
-echo "Peringatan"
-echo ""
-echo "Program ini dibuat semata-mata hanya untuk tujuan edukasi dan pembelajaran saja. Tidak"
-echo "ada maksud atau niatan mendorong kegiatan yang melanggar hukum (ilegal). Gunakan program"
-echo "ini hanya pada file yang kalian miliki saja. Pembuat (bgropay) tidak bertanggung jawab atas"
-echo "penyalahgunaan program ini. Terimakasih."
-echo ""
-read -p "Tekan [Enter] untuk melanjutkan..."
+echo -e "${b}Selamat datang di file2crack${r}"
+echo -e ""
+echo -e "${p}file2crack adalah sebuah program Bash sederhana yang dirancang untuk melakukan cracking${p}"
+echo -e "${p}kata sandi file ZIP, RAR, 7Z, PDF, dan file office (docx, xlsx, pptx).${r}"
+echo -e ""
+echo -e "${k}Peringatan${p}"
+echo -e ""
+echo -e "${p}Program ini dibuat semata-mata hanya untuk tujuan edukasi dan pembelajaran saja. Tidak${r}"
+echo -e "${p}ada maksud atau niatan mendorong kegiatan yang melanggar hukum (ilegal). Gunakan program${r}"
+echo -e "${p}ini hanya pada file yang kalian miliki saja. Pembuat (bgropay) tidak bertanggung jawab atas${r}"
+echo -e "${p}penyalahgunaan program ini. Terimakasih.${r}"
+echo -e ""
+read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk melanjutkan...\e[0m'
 
 while true; do
 
