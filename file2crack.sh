@@ -3,8 +3,8 @@
 # file2crack
 #
 # file2crack adalah sebuah program bash sederhana yang 
-# dirancang untuk mengekstrak hash file ZIP, RAR, 7z, 
-# PDF, Office (docx, xlsx, pptx).
+# dirancang untuk mengcrack kata sandi file ZIP, RAR, 
+# 7z, PDF, Office (docx, xlsx, pptx).
 #
 # Dibuat oleh bgropay
 #--------------------------------------------------
