@@ -1427,7 +1427,6 @@ while true; do
 
 	else
 		echo -e "${m}[-] ${p}Menu '${pilih_menu}' tidak tersedia. Silahkan pilih kembali..${r}"
-		echo ""
 		read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk kembali ke menu utama.\e[0m'
 		continue
 	fi
