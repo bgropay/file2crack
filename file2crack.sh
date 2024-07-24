@@ -108,7 +108,6 @@ while true; do
 	read -p $'\e[1;37mPilih menu: \e[1;33m' pilih_menu
 	if [[ -z "${pilih_menu}" ]]; then
 		echo -e "${m}[-] ${p}Menu tidak boleh kosong. Silahkan pilih kembali..${r}"
-		echo ""
 		read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk kembali ke menu utama.\e[0m'
 		continue
 
