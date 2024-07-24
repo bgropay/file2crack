@@ -564,6 +564,9 @@ while true; do
 						break
 					done
 					break
+				else
+					echo -e "${m}[-] ${p}Masukkan tidak valid. Harap masukan 'iya' atau 'tidak'.${r}"
+					continue
 				fi
 			done
 
@@ -755,6 +758,9 @@ while true; do
 						break
 					done
 					break
+				else
+					echo -e "${m}[-] ${p}Masukkan tidak valid. Harap masukkan 'iya' atau 'tidak'.${r}"
+					continue
 				fi
 			done
 
@@ -947,6 +953,9 @@ while true; do
 						break
 					done
 					break
+				else
+					echo -e "${m}[-] ${p}Masukkan tidak valid. Harap masukkan 'iya' atau 'tidak'.${r}"
+					continue
 				fi
 			done
 
@@ -1139,6 +1148,9 @@ while true; do
 						break
 					done
 					break
+				else
+					echo -e "${m}[-] ${p}Masukkan tidak valid. Harap masukkan 'iya' atau 'tidak'.${r}"
+					continue
 				fi
 			done
 
@@ -1331,6 +1343,9 @@ while true; do
 						break
 					done
 					break
+				else
+					echo -e "${m}[-] ${p}Masukkan tidak valid. Harap masukkan 'iya' atau 'tidak'.${r}"
+					continue
 				fi
 			done
 
