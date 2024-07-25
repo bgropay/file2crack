@@ -482,29 +482,64 @@ while true; do
 								echo -e "${m}[-] ${p}File Wordlist '${nama_file_wordlist_zip_john}' tidak ditemukan.${r}"
 								continue
 							else
-								pot_zip_john="pot_zip_john.txt"
-								echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_zip_john}' ditemukan.${r}"
-								read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
-								echo -e "${b}[*] ${p}Cracking kata sandi file ZIP '${nama_file_zip}' dengan John...${r}"
-								john --wordlist="${nama_file_wordlist_zip_john}" --pot="${pot_zip_john}" "${target_hash_zip_john}" > /dev/null 2>&1
-								if [[ -f "${pot_zip_john}" ]]; then
-									if [[ $(cat "${pot_zip_john}" | grep -o ":") ]]; then
-										kata_sandi_zip_john=$(cat "${pot_zip_john}" | cut -d ":" -f 2)
-										echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
-										echo -e "${h}[+] ${p}Kata sandi: ${h}${kata_sandi_zip_john}${r}"
-										rm "${pot_zip_john}"
+								while true; do
+									read -p $'\e[1;37mMau menggunakan mode verbose (iya/tidak): \e[1;33m' nanya_verbose_zip_john
+									if [[ "${nanya_verbose_zip_john}" == "iya" ]]; then
+										pot_zip_john="pot_zip_john.txt"
+										echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_zip_john}' ditemukan.${r}"
+										read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
+										echo -e "${b}[*] ${p}Cracking kata sandi file ZIP '${nama_file_zip}' dengan John...${r}"
+										john --wordlist="${nama_file_wordlist_zip_john}" --pot="${pot_zip_john}" --verbosity=6 --progress-every=1 "${target_hash_zip_john}"
+										if [[ -f "${pot_zip_john}" ]]; then
+											if [[ $(cat "${pot_zip_john}" | grep -o ":") ]]; then
+												kata_sandi_zip_john=$(cat "${pot_zip_john}" | cut -d ":" -f 2)
+												echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
+												echo -e "${h}[+] ${p}Kata sandi: ${h}${kata_sandi_zip_john}${r}"
+												rm "${pot_zip_john}"
+											else
+												echo -e "${m}[-] ${p}Kata sandi tidak ditemukan.${r}"
+												echo -e "${m}[-] ${p}Coba gunakan Wordlist yang lain.${r}"
+											fi
+											break
+										else
+											echo -e "${m}[-] ${p}Kata sandi tidak ditemukan.${r}"
+											echo -e "${m}[-] ${p}File pot John tidak ditemukan.${r}"
+										fi
+										break
+
+									elif [[ "${nanya_verbose_zip_john}" == "tidak" ]]; then
+										pot_zip_john="pot_zip_john.txt"
+										echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_zip_john}' ditemukan.${r}"
+										read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
+										echo -e "${b}[*] ${p}Cracking kata sandi file ZIP '${nama_file_zip}' dengan John...${r}"
+										john --wordlist="${nama_file_wordlist_zip_john}" --pot="${pot_zip_john}" "${target_hash_zip_john}" > /dev/null 2>&1
+										if [[ -f "${pot_zip_john}" ]]; then
+											if [[ $(cat "${pot_zip_john}" | grep -o ":") ]]; then
+												kata_sandi_zip_john=$(cat "${pot_zip_john}" | cut -d ":" -f 2)
+												echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
+												echo -e "${h}[+] ${p}Kata sandi: ${h}${kata_sandi_zip_john}${r}"
+												rm "${pot_zip_john}"
+											else
+												echo -e "${m}[-] ${p}Kata sandi tidak ditemukan.${r}"
+												echo -e "${m}[-] ${p}Coba gunakan Wordlist yang lain.${r}"
+											fi
+											break
+										else
+											echo -e "${m}[-] ${p}Kata sandi tidak ditemukan.${r}"
+											echo -e "${m}[-] ${p}File pot John tidak ditemukan.${r}"
+										fi
+										break
 									else
-										echo -e "${m}[-] ${p}Kata sandi tidak ditemukan.${r}"
-										echo -e "${m}[-] ${p}Coba gunakan Wordlist yang lain.${r}"
+										echo -e "${m}[-] ${p}Masukkan tidak valid. Harap masukkan 'iya' atau 'tidak'.${r}"
+										continue
 									fi
-									break
-								else
-									echo -e "${m}[-] ${p}Kata sandi tidak ditemukan.${r}"
-									echo -e "${m}[-] ${p}File pot John tidak ditemukan.${r}"
-								fi
-								break
+								done
 							fi
+							# break testing
+							break
 						fi
+						# break file wordlist
+						break
 					done
 					break
 				elif [[ "${nanya_zip_john}" == "tidak" ]]; then
@@ -530,29 +565,61 @@ while true; do
 												echo -e "${m}[-] ${p}File Wordlist '${nama_file_wordlist_zip_john}' tidak ditemukan.${r}"
 												continue
 											else
-												pot_zip_john="pot_zip_john.txt"
-												echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_zip_john}' ditemukan.${r}"
-												read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
-												echo -e "${b}[*] ${p}Cracking kata sandi file ZIP '${nama_file_zip}' dengan John...${r}"
-												john --wordlist="${nama_file_wordlist_zip_john}" --pot="${pot_zip_john}" "${target_hash_zip_john}" > /dev/null 2>&1
-												if [[ -f "${pot_zip_john}" ]]; then
-													if [[ $(cat "${pot_zip_john}" | grep -o ":") ]]; then
-														kata_sandi_zip_john=$(cat "${pot_zip_john}" | cut -d ":" -f 2)
-														echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
-														echo -e "${h}[+] ${p}Kata sandi: ${h}${kata_sandi_zip_john}${r}"
-														rm "${pot_zip_john}"
+												while true; do
+													read -p $'\e[1;37mMau menggunakan mode verbose (iya/tidak): \e[1;33m' nanya_verbose_zip_john
+													if [[ "${nanya_verbose_zip_john}" == "iya" ]]; then
+														pot_zip_john="pot_zip_john.txt"
+														echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_zip_john}' ditemukan.${r}"
+														read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
+														echo -e "${b}[*] ${p}Cracking kata sandi file ZIP '${nama_file_zip}' dengan John...${r}"
+														john --wordlist="${nama_file_wordlist_zip_john}" --pot="${pot_zip_john}" --verbosity=6 --progress-every=1 "${target_hash_zip_john}"
+														if [[ -f "${pot_zip_john}" ]]; then
+															if [[ $(cat "${pot_zip_john}" | grep -o ":") ]]; then
+																kata_sandi_zip_john=$(cat "${pot_zip_john}" | cut -d ":" -f 2)
+																echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
+																echo -e "${h}[+] ${p}Kata sandi: ${h}${kata_sandi_zip_john}${r}"
+																rm "${pot_zip_john}"
+															else
+																echo -e "${m}[-] ${p}Kata sandi tidak ditemukan.${r}"
+																echo -e "${m}[-] ${p}Coba gunakan Wordlist yang lain.${r}"
+															fi
+															break
+														else
+															echo -e "${m}[-] ${p}Kata sandi tidak ditemukan.${r}"
+															echo -e "${m}[-] ${p}File pot John tidak ditemukan.${r}"
+														fi
+														break
+													elif [[ "${nanya_verbose_zip_john}" == "tidak" ]]; then
+														pot_zip_john="pot_zip_john.txt"
+														echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_zip_john}' ditemukan.${r}"
+														read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
+														echo -e "${b}[*] ${p}Cracking kata sandi file ZIP '${nama_file_zip}' dengan John...${r}"
+														john --wordlist="${nama_file_wordlist_zip_john}" --pot="${pot_zip_john}" "${target_hash_zip_john}" > /dev/null 2>&1
+														if [[ -f "${pot_zip_john}" ]]; then
+															if [[ $(cat "${pot_zip_john}" | grep -o ":") ]]; then
+																kata_sandi_zip_john=$(cat "${pot_zip_john}" | cut -d ":" -f 2)
+																echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
+																echo -e "${h}[+] ${p}Kata sandi: ${h}${kata_sandi_zip_john}${r}"
+																rm "${pot_zip_john}"
+															else
+																echo -e "${m}[-] ${p}Kata sandi tidak ditemukan.${r}"
+																echo -e "${m}[-] ${p}Coba gunakan Wordlist yang lain.${r}"
+															fi
+															break
+														else
+															echo -e "${m}[-] ${p}Kata sandi tidak ditemukan.${r}"
+															echo -e "${m}[-] ${p}File pot John tidak ditemukan.${r}"
+														fi
+														break
 													else
-														echo -e "${m}[-] ${p}Kata sandi tidak ditemukan.${r}"
-														echo -e "${m}[-] ${p}Coba gunakan Wordlist yang lain.${r}"
+														echo -e "${m}[-] ${p}Masukkan tidak valid. Harap masukkan 'iya' atau 'tidak'.${r}"
+														continue
 													fi
-													break
-												else
-													echo -e "${m}[-] ${p}Kata sandi tidak ditemukan.${r}"
-													echo -e "${m}[-] ${p}File pot John tidak ditemukan.${r}"
-												fi
-												break
+												done
 											fi
+											break
 										fi
+										break
 									done
 								else
 									echo -e "${m}[-] ${p}Format hash file hash '{nama_file_hash_dari_file_zip_john}' tidak valid.${r}"
@@ -622,29 +689,62 @@ while true; do
 										echo -e "${m}[-] ${p}File Wordlist '${nama_file_wordlist_zip_john}' tidak ditemukan.${r}"
 										continue
 									else
-										pot_zip_john="pot_zip_john.txt"
-										echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_zip_john}' ditemukan.${r}"
-										read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
-										echo -e "${b}[*] ${p}Cracking kata sandi file ZIP '${nama_file_zip}' dengan John...${r}"
-										john --wordlist="${nama_file_wordlist_zip_john}" --pot="${pot_zip_john}" "${nama_file_hash_dari_file_zip_john}" > /dev/null 2>&1
-										if [[ -f "${pot_zip_john}" ]]; then
-											if [[ $(cat "${pot_zip_john}" | grep -o ":") ]]; then
-												kata_sandi_zip_john=$(cat "${pot_zip_john}" | cut -d ":" -f 2)
-												echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
-												echo -e "${h}[+] ${p}Kata sandi: ${h}${kata_sandi_zip_john}${r}"
-												rm "${pot_zip_john}"
+										while true; do
+											read -p $'\e[1;37mMau menggunakan mode verbose (iya/tidak): \e[1;33m' nanya_verbose_zip_john
+											if [[ "${nanya_verbose_zip_john}" == "iya" ]]; then
+												pot_zip_john="pot_zip_john.txt"
+												echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_zip_john}' ditemukan.${r}"
+												read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
+												echo -e "${b}[*] ${p}Cracking kata sandi file ZIP '${nama_file_zip}' dengan John...${r}"
+												john --wordlist="${nama_file_wordlist_zip_john}" --pot="${pot_zip_john}" --verbosity=6 --progress-every=1 "${nama_file_hash_dari_file_zip_john}"
+												if [[ -f "${pot_zip_john}" ]]; then
+													if [[ $(cat "${pot_zip_john}" | grep -o ":") ]]; then
+														kata_sandi_zip_john=$(cat "${pot_zip_john}" | cut -d ":" -f 2)
+														echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
+														echo -e "${h}[+] ${p}Kata sandi: ${h}${kata_sandi_zip_john}${r}"
+														rm "${pot_zip_john}"
+													else
+														echo -e "${m}[-] ${p}Kata sandi tidak ditemukan.${r}"
+														echo -e "${m}[-] ${p}Coba gunakan Wordlist yang lain.${r}"
+													fi
+													break
+												else
+													echo -e "${m}[-] ${p}Kata sandi tidak ditemukan.${r}"
+													echo -e "${m}[-] ${p}File pot John tidak ditemukan.${r}"
+												fi
+												break
+
+											elif [[ "${nanya_verbose_zip_john}" == "tidak" ]]; then
+												pot_zip_john="pot_zip_john.txt"
+												echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_zip_john}' ditemukan.${r}"
+												read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
+												echo -e "${b}[*] ${p}Cracking kata sandi file ZIP '${nama_file_zip}' dengan John...${r}"
+												john --wordlist="${nama_file_wordlist_zip_john}" --pot="${pot_zip_john}" "${nama_file_hash_dari_file_zip_john}" > /dev/null 2>&1
+												if [[ -f "${pot_zip_john}" ]]; then
+													if [[ $(cat "${pot_zip_john}" | grep -o ":") ]]; then
+														kata_sandi_zip_john=$(cat "${pot_zip_john}" | cut -d ":" -f 2)
+														echo -e "${h}[+] ${p}Kata sandi ditemukan.${r}"
+														echo -e "${h}[+] ${p}Kata sandi: ${h}${kata_sandi_zip_john}${r}"
+														rm "${pot_zip_john}"
+													else
+														echo -e "${m}[-] ${p}Kata sandi tidak ditemukan.${r}"
+														echo -e "${m}[-] ${p}Coba gunakan Wordlist yang lain.${r}"
+													fi
+													break
+												else
+													echo -e "${m}[-] ${p}Kata sandi tidak ditemukan.${r}"
+													echo -e "${m}[-] ${p}File pot John tidak ditemukan.${r}"
+												fi
+												break
 											else
-												echo -e "${m}[-] ${p}Kata sandi tidak ditemukan.${r}"
-												echo -e "${m}[-] ${p}Coba gunakan Wordlist yang lain.${r}"
+												echo -e "${m}[-] ${p}Masukkan tidak valid. Harap masukkan 'iya' atau 'tidak'.${r}"
+												continue
 											fi
-											break
-										else
-											echo -e "${m}[-] ${p}Kata sandi tidak ditemukan.${r}"
-											echo -e "${m}[-] ${p}File pot John tidak ditemukan.${r}"
-										fi
-										break
+										done
 									fi
+									break
 								fi
+								break
 							done
 						else
 							echo -e "${m}[-] ${p}Format hash file hash '${nama_file_hash_dari_file_zip_john}' tidak valid.${r}"
