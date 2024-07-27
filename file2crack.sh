@@ -485,7 +485,7 @@ while true; do
 								echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_zip_john}' ditemukan.${r}"
 								pot_zip_john="pot_zip_john.txt"
 								while true; do
-									read -p $'\e[1;37mApakah Anda ingin  menggunakan mode verbose (iya/tidak): \e[1;33m' nanya_verbose_zip_john
+									read -p $'\e[1;37mApakah Anda ingin menggunakan mode verbose (iya/tidak): \e[1;33m' nanya_verbose_zip_john
 									if [[ "${nanya_verbose_zip_john}" == "iya" ]]; then
 										read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 										echo -e "${b}[*] ${p}Cracking kata sandi file ZIP '${nama_file_zip}' dengan John...${r}"
@@ -566,7 +566,7 @@ while true; do
 												pot_zip_john="pot_zip_john.txt"
 												echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_zip_john}' ditemukan.${r}"
 												while true; do
-													read -p $'\e[1;37mApakah Anda ingin  menggunakan mode verbose (iya/tidak): \e[1;33m' nanya_verbose_zip_john
+													read -p $'\e[1;37mApakah Anda ingin menggunakan mode verbose (iya/tidak): \e[1;33m' nanya_verbose_zip_john
 													if [[ "${nanya_verbose_zip_john}" == "iya" ]]; then
 														read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 														echo -e "${b}[*] ${p}Cracking kata sandi file ZIP '${nama_file_zip}' dengan John...${r}"
