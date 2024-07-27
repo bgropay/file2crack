@@ -483,10 +483,10 @@ while true; do
 								continue
 							else
 								echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_zip_john}' ditemukan.${r}"
+								pot_zip_john="pot_zip_john.txt"
 								while true; do
 									read -p $'\e[1;37mApakah Anda ingin  menggunakan mode verbose (iya/tidak): \e[1;33m' nanya_verbose_zip_john
 									if [[ "${nanya_verbose_zip_john}" == "iya" ]]; then
-										pot_zip_john="pot_zip_john.txt"
 										read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 										echo -e "${b}[*] ${p}Cracking kata sandi file ZIP '${nama_file_zip}' dengan John...${r}"
 										john --wordlist="${nama_file_wordlist_zip_john}" --pot="${pot_zip_john}" --verbosity=6 --progress-every=1 "${target_hash_zip_john}"
@@ -508,7 +508,6 @@ while true; do
 										break
 
 									elif [[ "${nanya_verbose_zip_john}" == "tidak" ]]; then
-										pot_zip_john="pot_zip_john.txt"
 										read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 										echo -e "${b}[*] ${p}Cracking kata sandi file ZIP '${nama_file_zip}' dengan John...${r}"
 										john --wordlist="${nama_file_wordlist_zip_john}" --pot="${pot_zip_john}" "${target_hash_zip_john}" > /dev/null 2>&1
@@ -564,11 +563,11 @@ while true; do
 												echo -e "${m}[-] ${p}File Wordlist '${nama_file_wordlist_zip_john}' tidak ditemukan.${r}"
 												continue
 											else
+												pot_zip_john="pot_zip_john.txt"
 												echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_zip_john}' ditemukan.${r}"
 												while true; do
 													read -p $'\e[1;37mApakah Anda ingin  menggunakan mode verbose (iya/tidak): \e[1;33m' nanya_verbose_zip_john
 													if [[ "${nanya_verbose_zip_john}" == "iya" ]]; then
-														pot_zip_john="pot_zip_john.txt"
 														read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 														echo -e "${b}[*] ${p}Cracking kata sandi file ZIP '${nama_file_zip}' dengan John...${r}"
 														john --wordlist="${nama_file_wordlist_zip_john}" --pot="${pot_zip_john}" --verbosity=6 --progress-every=1 "${target_hash_zip_john}"
@@ -589,7 +588,6 @@ while true; do
 														fi
 														break
 													elif [[ "${nanya_verbose_zip_john}" == "tidak" ]]; then
-														pot_zip_john="pot_zip_john.txt"
 														read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 														echo -e "${b}[*] ${p}Cracking kata sandi file ZIP '${nama_file_zip}' dengan John...${r}"
 														john --wordlist="${nama_file_wordlist_zip_john}" --pot="${pot_zip_john}" "${target_hash_zip_john}" > /dev/null 2>&1
@@ -639,28 +637,28 @@ while true; do
 
 			# memasukkan nama file zip
 			while true; do
-				read -p $'\e[1;37mMasukkan nama file ZIP: \e[1;33m' nama_file_zip
+				read -p $'\e[1;37mMasukkan nama file ZIP: \e[1;33m' nama_file_zip_john
 
 				# kondisi jika nama file zip kosong
-				if [[ -z "${nama_file_zip}" ]]; then
+				if [[ -z "${nama_file_zip_john}" ]]; then
 					echo -e "${m}[-] ${p}Nama file ZIP tidak boleh kosong.${r}"
 					continue
 				fi
 
 				# kondisi jika file zip tidak ditemukan
-				if [[ ! -f "${nama_file_zip}" ]]; then
-					echo -e "${m}[-] ${p}File ZIP '${nama_file_zip}' tidak ditemukan.${r}"
+				if [[ ! -f "${nama_file_zip_john}" ]]; then
+					echo -e "${m}[-] ${p}File ZIP '${nama_file_zip_john}' tidak ditemukan.${r}"
 					continue
 				fi
 
 				# kondisi jika file bukan file zip
-				if [[ "${nama_file_zip##*.}" != "zip" ]]; then
-					echo -e "${m}[-] ${p}File '${nama_file_zip}' bukan file ZIP.${r}"
+				if [[ "${nama_file_zip_john##*.}" != "zip" ]]; then
+					echo -e "${m}[-] ${p}File '${nama_file_zip_john}' bukan file ZIP.${r}"
 					continue
 				fi
 
 				# kondisi jika file zip ditemukan
-				echo -e "${h}[+] ${p}File ZIP '${nama_file_zip}' ditemukan.${r}"
+				echo -e "${h}[+] ${p}File ZIP '${nama_file_zip_john}' ditemukan.${r}"
 				break
 			done
 
@@ -688,12 +686,12 @@ while true; do
 										continue
 									else
 										echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_zip_john}' ditemukan.${r}"
+										pot_zip_john="pot_zip_john.txt"
 										while true; do
 											read -p $'\e[1;37mApakah Anda ingin menggunakan mode verbose (iya/tidak): \e[1;33m' nanya_verbose_zip_john
 											if [[ "${nanya_verbose_zip_john}" == "iya" ]]; then
-												pot_zip_john="pot_zip_john.txt"
 												read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
-												echo -e "${b}[*] ${p}Cracking kata sandi file ZIP '${nama_file_zip}' dengan John...${r}"
+												echo -e "${b}[*] ${p}Cracking kata sandi file ZIP '${nama_file_zip_john}' dengan John...${r}"
 												john --wordlist="${nama_file_wordlist_zip_john}" --pot="${pot_zip_john}" --verbosity=6 --progress-every=1 "${nama_file_hash_dari_file_zip_john}"
 												if [[ -f "${pot_zip_john}" ]]; then
 													if [[ $(cat "${pot_zip_john}" | grep -o ":") ]]; then
@@ -713,9 +711,8 @@ while true; do
 												break
 
 											elif [[ "${nanya_verbose_zip_john}" == "tidak" ]]; then
-												pot_zip_john="pot_zip_john.txt"
 												read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
-												echo -e "${b}[*] ${p}Cracking kata sandi file ZIP '${nama_file_zip}' dengan John...${r}"
+												echo -e "${b}[*] ${p}Cracking kata sandi file ZIP '${nama_file_zip_john}' dengan John...${r}"
 												john --wordlist="${nama_file_wordlist_zip_john}" --pot="${pot_zip_john}" "${nama_file_hash_dari_file_zip_john}" > /dev/null 2>&1
 												if [[ -f "${pot_zip_john}" ]]; then
 													if [[ $(cat "${pot_zip_john}" | grep -o ":") ]]; then
@@ -774,10 +771,10 @@ while true; do
 								continue
 							else
 								echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_rar_john}' ditemukan.${r}"
+								pot_rar_john="pot_rar_john.txt"
 								while true; do
 									read -p $'\e[1;37mApakah Anda ingin menggunakan mode verbose (iya/tidak): \e[1;33m' nanya_verbose_rar_john
 									if [[ "${nanya_verbose_rar_john}" == "iya" ]]; then
-										pot_rar_john="pot_rar_john.txt"
 										read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 										echo -e "${b}[*] ${p}Cracking kata sandi file RAR '${nama_file_rar}' dengan John...${r}"
 										john --wordlist="${nama_file_wordlist_rar_john}" --pot="${pot_rar_john}" --verbosity=6 --progress-every=1 "${target_hash_rar_john}"
@@ -799,7 +796,6 @@ while true; do
 										break
 
 									elif [[ "${nanya_verbose_rar_john}" == "tidak" ]]; then
-										pot_rar_john="pot_rar_john.txt"
 										read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 										echo -e "${b}[*] ${p}Cracking kata sandi file RAR '${nama_file_rar}' dengan John...${r}"
 										john --wordlist="${nama_file_wordlist_rar_john}" --pot="${pot_rar_john}" "${target_hash_rar_john}" > /dev/null 2>&1
@@ -854,10 +850,10 @@ while true; do
 												continue
 											else
    												echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_rar_john}' ditemukan.${r}"
+												pot_rar_john="pot_rar_john.txt"
 												while true; do
 													read -p $'\e[1;37mApakah Anda ingin menggunakan mode verbose (iya/tidak): \e[1;33m' nanya_verbose_rar_john
 													if [[ "${nanya_verbose_rar_john}" == "iya" ]]; then
-														pot_rar_john="pot_rar_john.txt"
 														read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 														echo -e "${b}[*] ${p}Cracking kata sandi file RAR '${nama_file_rar}' dengan John...${r}"
 														john --wordlist="${nama_file_wordlist_rar_john}" --pot="${pot_rar_john}" --verbosity=6 --progress-every=1 "${target_hash_rar_john}"
@@ -879,7 +875,6 @@ while true; do
 														break
 
 													elif [[ "${nanya_verbose_rar_john}" == "tidak" ]]; then
-														pot_rar_john="pot_rar_john.txt"
 														read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 														echo -e "${b}[*] ${p}Cracking kata sandi file RAR '${nama_file_rar}' dengan John...${r}"
 														john --wordlist="${nama_file_wordlist_rar_john}" --pot="${pot_rar_john}" "${target_hash_rar_john}" > /dev/null 2>&1
@@ -930,28 +925,28 @@ while true; do
 
 			# memasukkan nama file rar
 			while true; do
-				read -p $'\e[1;37mMasukkan nama file RAR: \e[1;33m' nama_file_rar
+				read -p $'\e[1;37mMasukkan nama file RAR: \e[1;33m' nama_file_rar_john
 
 				# kondisi jika nama file rar kosong
-				if [[ -z "${nama_file_rar}" ]]; then
+				if [[ -z "${nama_file_rar_john}" ]]; then
 					echo -e "${m}[-] ${p}Nama file RAR tidak boleh kosong.${r}"
 					continue
 				fi
 
 				# kondisi jika file rar tidak ditemukan
-				if [[ ! -f "${nama_file_rar}" ]]; then
-					echo -e "${m}[-] ${p}File RAR '${nama_file_rar}' tidak ditemukan.${r}"
+				if [[ ! -f "${nama_file_rar_john}" ]]; then
+					echo -e "${m}[-] ${p}File RAR '${nama_file_rar_john}' tidak ditemukan.${r}"
 					continue
 				fi
 
 				# kondisi jika file bukan file rar
-				if [[ "${nama_file_rar##*.}" != "rar" ]]; then
-					echo -e "${m}[-] ${p}File '${nama_file_rar}' bukan file RAR.${r}"
+				if [[ "${nama_file_rar_john##*.}" != "rar" ]]; then
+					echo -e "${m}[-] ${p}File '${nama_file_rar_john}' bukan file RAR.${r}"
 					continue
 				fi
 
 				# kondisi jika file rar ditemukan
-				echo -e "${h}[+] ${p}File RAR '${nama_file_rar}' ditemukan.${r}"
+				echo -e "${h}[+] ${p}File RAR '${nama_file_rar_john}' ditemukan.${r}"
 				break
 			done
 
@@ -979,12 +974,12 @@ while true; do
 										continue
 									else
 										echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_rar_john}' ditemukan.${r}"
+										pot_rar_john="pot_rar_john.txt"
 										while true; do
 											read -p $'\e[1;37mApakah Anda ingin menggunakan mode verbose (iya/tidak): \e[1;33m' nanya_verbose_rar_john
 											if [[ "${nanya_verbose_rar_john}" == "iya" ]]; then
-												pot_rar_john="pot_rar_john.txt"
 												read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
-												echo -e "${b}[*] ${p}Cracking kata sandi file RAR '${nama_file_rar}' dengan John...${r}"
+												echo -e "${b}[*] ${p}Cracking kata sandi file RAR '${nama_file_rar_john}' dengan John...${r}"
 												john --wordlist="${nama_file_wordlist_rar_john}" --pot="${pot_rar_john}" --verbosity=6 --progress-every=1 "${nama_file_hash_dari_file_rar_john}"
 												if [[ -f "${pot_rar_john}" ]]; then
 													if [[ $(cat "${pot_rar_john}" | grep -o ":") ]]; then
@@ -1004,9 +999,8 @@ while true; do
 												break
 
 											elif [[ "${nanya_verbose_rar_john}" == "tidak" ]]; then
-												pot_rar_john="pot_rar_john.txt"
 												read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
-												echo -e "${b}[*] ${p}Cracking kata sandi file RAR '${nama_file_rar}' dengan John...${r}"
+												echo -e "${b}[*] ${p}Cracking kata sandi file RAR '${nama_file_rar_john}' dengan John...${r}"
 												john --wordlist="${nama_file_wordlist_rar_john}" --pot="${pot_rar_john}" "${nama_file_hash_dari_file_rar_john}" > /dev/null 2>&1
 												if [[ -f "${pot_rar_john}" ]]; then
 													if [[ $(cat "${pot_rar_john}" | grep -o ":") ]]; then
@@ -1065,10 +1059,10 @@ while true; do
 								continue
 							else
 								echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_7z_john}' ditemukan.${r}"
+								pot_7z_john="pot_7z_john.txt"
 								while true; do
 									read -p $'\e[1;37mApakah Anda ingin menggunakan mode verbose (iya/tidak): \e[1;33m' nanya_verbose_7z_john
 									if [[ "${nanya_verbose_7z_john}" == "iya" ]]; then
-										pot_7z_john="pot_7z_john.txt"
 										read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 										echo -e "${b}[*] ${p}Cracking kata sandi file 7z '${nama_file_7z}' dengan John...${r}"
 										john --wordlist="${nama_file_wordlist_7z_john}" --pot="${pot_7z_john}" --verbosity=6 --progress-every=1 "${target_hash_7z_john}"
@@ -1090,7 +1084,6 @@ while true; do
 										break
 
 									elif [[ "${nanya_verbose_7z_john}" == "tidak" ]]; then
-										pot_7z_john="pot_7z_john.txt"
 										read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 										echo -e "${b}[*] ${p}Cracking kata sandi file 7z '${nama_file_7z}' dengan John...${r}"
 										john --wordlist="${nama_file_wordlist_7z_john}" --pot="${pot_7z_john}" "${target_hash_7z_john}" > /dev/null 2>&1
@@ -1145,10 +1138,10 @@ while true; do
 												continue
 											else
 												echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_7z_john}' ditemukan.${r}"
+												pot_7z_john="pot_7z_john.txt"
 												while true; do
 													read -p $'\e[1;37mApakah Anda ingin menggunakan mode verbose (iya/tidak): \e[1;33m' nanya_verbose_7z_john
 													if [[ "${nanya_verbose_7z_john}" == "iya" ]]; then
-														pot_7z_john="pot_7z_john.txt"
 														read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 														echo -e "${b}[*] ${p}Cracking kata sandi file 7z '${nama_file_7z}' dengan John...${r}"
 														john --wordlist="${nama_file_wordlist_7z_john}" --pot="${pot_7z_john}" --verbosity=6 --progress-every=1 "${target_hash_7z_john}"
@@ -1170,7 +1163,6 @@ while true; do
 														break
 
 													elif [[ "${nanya_verbose_7z_john}" == "tidak" ]]; then
-														pot_7z_john="pot_7z_john.txt"
 														read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 														echo -e "${b}[*] ${p}Cracking kata sandi file 7z '${nama_file_7z}' dengan John...${r}"
 														john --wordlist="${nama_file_wordlist_7z_john}" --pot="${pot_7z_john}" "${target_hash_7z_john}" > /dev/null 2>&1
@@ -1221,28 +1213,28 @@ while true; do
 
 			# memasukkan nama file 7z
 			while true; do
-				read -p $'\e[1;37mMasukkan nama file 7z: \e[1;33m' nama_file_7z
+				read -p $'\e[1;37mMasukkan nama file 7z: \e[1;33m' nama_file_7z_john
 
 				# kondisi jika nama file 7z kosong
-				if [[ -z "${nama_file_7z}" ]]; then
+				if [[ -z "${nama_file_7z_john}" ]]; then
 					echo -e "${m}[-] ${p}Nama file 7z tidak boleh kosong.${r}"
 					continue
 				fi
 
 				# kondisi jika file 7z tidak ditemukan
-				if [[ ! -f "${nama_file_7z}" ]]; then
-					echo -e "${m}[-] ${p}File 7z '${nama_file_7z}' tidak ditemukan.${r}"
+				if [[ ! -f "${nama_file_7z_john}" ]]; then
+					echo -e "${m}[-] ${p}File 7z '${nama_file_7z_john}' tidak ditemukan.${r}"
 					continue
 				fi
 
 				# kondisi jika file bukan file 7z
-				if [[ "${nama_file_7z##*.}" != "7z" ]]; then
-					echo -e "${m}[-] ${p}File '${nama_file_7z}' bukan file 7z.${r}"
+				if [[ "${nama_file_7z_john##*.}" != "7z" ]]; then
+					echo -e "${m}[-] ${p}File '${nama_file_7z_john}' bukan file 7z.${r}"
 					continue
 				fi
 
 				# kondisi jika file 7z ditemukan
-				echo -e "${h}[+] ${p}File 7z '${nama_file_7z}' ditemukan.${r}"
+				echo -e "${h}[+] ${p}File 7z '${nama_file_7z_john}' ditemukan.${r}"
 				break
 			done
 
@@ -1269,12 +1261,12 @@ while true; do
 										continue
 									else
 										echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_7z_john}' ditemukan.${r}"
+										pot_7z_john="pot_7z_john.txt"
 										while true; do
 											read -p $'\e[1;37mApakah Anda ingin menggunakan mode verbose (iya/tidak): \e[1;33m' nanya_verbose_7z_john
 											if [[ "${nanya_verbose_7z_john}" == "iya" ]]; then
-												pot_7z_john="pot_7z_john.txt"
 												read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
-												echo -e "${b}[*] ${p}Cracking kata sandi file 7z '${nama_file_7z}' dengan John...${r}"
+												echo -e "${b}[*] ${p}Cracking kata sandi file 7z '${nama_file_7z_john}' dengan John...${r}"
 												john --wordlist="${nama_file_wordlist_7z_john}" --pot="${pot_7z_john}" --verbosity=6 --progress-every=1 "${nama_file_hash_dari_file_7z_john}"
 												if [[ -f "${pot_7z_john}" ]]; then
 													if [[ $(cat "${pot_7z_john}" | grep -o ":") ]]; then
@@ -1294,9 +1286,8 @@ while true; do
 												break
 
 											elif [[ "${nanya_verbose_7z_john}" == "tidak" ]]; then
-												pot_7z_john="pot_7z_john.txt"
 												read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
-												echo -e "${b}[*] ${p}Cracking kata sandi file 7z '${nama_file_7z}' dengan John...${r}"
+												echo -e "${b}[*] ${p}Cracking kata sandi file 7z '${nama_file_7z_john}' dengan John...${r}"
 												john --wordlist="${nama_file_wordlist_7z_john}" --pot="${pot_7z_john}" "${nama_file_hash_dari_file_7z_john}" > /dev/null 2>&1
 												if [[ -f "${pot_7z_john}" ]]; then
 													if [[ $(cat "${pot_7z_john}" | grep -o ":") ]]; then
@@ -1356,10 +1347,10 @@ while true; do
 								continue
 							else
 								echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_pdf_john}' ditemukan.${r}"
+								pot_pdf_john="pot_pdf_john.txt"
 								while true; do
 									read -p $'\e[1;37mApakah Anda ingin menggunakan mode verbose (iya/tidak): \e[1;33m' nanya_verbose_pdf_john
 									if [[ "${nanya_verbose_pdf_john}" == "iya" ]]; then
-										pot_pdf_john="pot_pdf_john.txt"
 										read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 										echo -e "${b}[*] ${p}Cracking kata sandi file PDF '${nama_file_pdf}' dengan John...${r}"
 										john --wordlist="${nama_file_wordlist_pdf_john}" --pot="${pot_pdf_john}" --verbosity=6 --progress-every=1 "${target_hash_pdf_john}"
@@ -1381,7 +1372,6 @@ while true; do
 										break
 
 									elif [[ "${nanya_verbose_pdf_john}" == "tidak" ]]; then
-										pot_pdf_john="pot_pdf_john.txt"
 										read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 										echo -e "${b}[*] ${p}Cracking kata sandi file PDF '${nama_file_pdf}' dengan John...${r}"
 										john --wordlist="${nama_file_wordlist_pdf_john}" --pot="${pot_pdf_john}" "${target_hash_pdf_john}" > /dev/null 2>&1
@@ -1436,10 +1426,10 @@ while true; do
 												continue
 											else
 												echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_pdf_john}' ditemukan.${r}"
+												pot_pdf_john="pot_pdf_john.txt"
 												while true; do
 													read -p $'\e[1;37mApakah Anda ingin menggunakan mode verbose (iya/tidak): \e[1;33m' nanya_verbose_pdf_john
 													if [[ "${nanya_verbose_pdf_john}" == "iya" ]]; then
-														pot_pdf_john="pot_pdf_john.txt"
 														read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 														echo -e "${b}[*] ${p}Cracking kata sandi file PDF '${nama_file_pdf}' dengan John...${r}"
 														john --wordlist="${nama_file_wordlist_pdf_john}" --pot="${pot_pdf_john}" --verbosity=6 --progress-every=1 "${target_hash_pdf_john}"
@@ -1461,7 +1451,6 @@ while true; do
 														break
 
 													elif [[ "${nanya_verbose_pdf_john}" == "tidak" ]]; then
-														pot_pdf_john="pot_pdf_john.txt"
 														read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 														echo -e "${b}[*] ${p}Cracking kata sandi file PDF '${nama_file_pdf}' dengan John...${r}"
 														john --wordlist="${nama_file_wordlist_pdf_john}" --pot="${pot_pdf_john}" "${target_hash_pdf_john}" > /dev/null 2>&1
@@ -1512,28 +1501,28 @@ while true; do
 
 			# memasukkan nama file pdf
 			while true; do
-				read -p $'\e[1;37mMasukkan nama file PDF: \e[1;33m' nama_file_pdf
+				read -p $'\e[1;37mMasukkan nama file PDF: \e[1;33m' nama_file_pdf_john
 
 				# kondisi jika nama file pdf kosong
-				if [[ -z "${nama_file_pdf}" ]]; then
+				if [[ -z "${nama_file_pdf_john}" ]]; then
 					echo -e "${m}[-] ${p}Nama file PDF tidak boleh kosong.${r}"
 					continue
 				fi
 
 				# kondisi jika file pdf tidak ditemukan
-				if [[ ! -f "${nama_file_pdf}" ]]; then
-					echo -e "${m}[-] ${p}File PDF '${nama_file_pdf}' tidak ditemukan.${r}"
+				if [[ ! -f "${nama_file_pdf_john}" ]]; then
+					echo -e "${m}[-] ${p}File PDF '${nama_file_pdf_john}' tidak ditemukan.${r}"
 					continue
 				fi
 
 				# kondisi jika file bukan file pdf
-				if [[ "${nama_file_pdf##*.}" != "pdf" ]]; then
-					echo -e "${m}[-] ${p}File '${nama_file_pdf}' bukan file PDF.${r}"
+				if [[ "${nama_file_pdf_john##*.}" != "pdf" ]]; then
+					echo -e "${m}[-] ${p}File '${nama_file_pdf_john}' bukan file PDF.${r}"
 					continue
 				fi
 
 				# kondisi jika file pdf ditemukan
-				echo -e "${h}[+] ${p}File PDF '${nama_file_pdf}' ditemukan.${r}"
+				echo -e "${h}[+] ${p}File PDF '${nama_file_pdf_john}' ditemukan.${r}"
 				break
 			done
 
@@ -1561,12 +1550,12 @@ while true; do
 										continue
 									else
 										echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_pdf_john}' ditemukan.${r}"
+										pot_pdf_john="pot_pdf_john.txt"
 										while true; do
 											read -p $'\e[1;37mApakah Anda ingin menggunakan mode verbose (iya/tidak): \e[1;33m' nanya_verbose_pdf_john
 											if [[ "${nanya_verbose_pdf_john}" == "iya" ]]; then
-												pot_pdf_john="pot_pdf_john.txt"
 												read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
-												echo -e "${b}[*] ${p}Cracking kata sandi file PDF '${nama_file_pdf}' dengan John...${r}"
+												echo -e "${b}[*] ${p}Cracking kata sandi file PDF '${nama_file_pdf_john}' dengan John...${r}"
 												john --wordlist="${nama_file_wordlist_pdf_john}" --pot="${pot_pdf_john}" --verbosity=6 --progress-every=1 "${nama_file_hash_dari_file_pdf_john}"
 												if [[ -f "${pot_pdf_john}" ]]; then
 													if [[ $(cat "${pot_pdf_john}" | grep -o ":") ]]; then
@@ -1586,9 +1575,8 @@ while true; do
 												break
 
 											elif [[ "${nanya_verbose_pdf_john}" == "tidak" ]]; then
-												pot_pdf_john="pot_pdf_john.txt"
 												read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
-												echo -e "${b}[*] ${p}Cracking kata sandi file PDF '${nama_file_pdf}' dengan John...${r}"
+												echo -e "${b}[*] ${p}Cracking kata sandi file PDF '${nama_file_pdf_john}' dengan John...${r}"
 												john --wordlist="${nama_file_wordlist_pdf_john}" --pot="${pot_pdf_john}" "${nama_file_hash_dari_file_pdf_john}" > /dev/null 2>&1
 												if [[ -f "${pot_pdf_john}" ]]; then
 													if [[ $(cat "${pot_pdf_john}" | grep -o ":") ]]; then
@@ -1647,10 +1635,10 @@ while true; do
 								continue
 							else
 								echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_office_john}' ditemukan.${r}"
+								pot_office_john="pot_office_john.txt"
 								while true; do
 									read -p $'\e[1;37mApakah Anda ingin menggunakan mode verbose (iya/tidak): \e[1;33m' nanya_verbose_office_john
 									if [[ "${nanya_verbose_office_john}" == "iya" ]]; then
-										pot_office_john="pot_office_john.txt"
 										read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 										echo -e "${b}[*] ${p}Cracking kata sandi file Office '${nama_file_office}' dengan John...${r}"
 										john --wordlist="${nama_file_wordlist_office_john}" --pot="${pot_office_john}" --verbosity=6 --progress-every=1 "${target_hash_office_john}"
@@ -1672,7 +1660,6 @@ while true; do
 										break
 
 									elif [[ "${nanya_verbose_office_john}" == "tidak" ]]; then
-										pot_office_john="pot_office_john.txt"
 										read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 										echo -e "${b}[*] ${p}Cracking kata sandi file Office '${nama_file_office}' dengan John...${r}"
 										john --wordlist="${nama_file_wordlist_office_john}" --pot="${pot_office_john}" "${target_hash_office_john}" > /dev/null 2>&1
@@ -1727,10 +1714,10 @@ while true; do
 												continue
 											else
 												echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_office_john}' ditemukan.${r}"
+												pot_office_john="pot_office_john.txt"
 												while true; do
 													read -p $'\e[1;37mApakah Anda ingin menggunakan mode verbose (iya/tidak): \e[1;33m' nanya_verbose_office_john
 													if [[ "${nanya_verbose_office_john}" == "iya" ]]; then
-														pot_office_john="pot_office_john.txt"
 														read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 														echo -e "${b}[*] ${p}Cracking kata sandi file Office '${nama_file_office}' dengan John...${r}"
 														john --wordlist="${nama_file_wordlist_office_john}" --pot="${pot_office_john}" --verbosity=6 --progress-every=1 "${target_hash_office_john}"
@@ -1752,7 +1739,6 @@ while true; do
 														break
 
 													elif [[ "${nanya_verbose_office_john}" == "tidak" ]]; then
-														pot_office_john="pot_office_john.txt"
 														read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
 														echo -e "${b}[*] ${p}Cracking kata sandi file Office '${nama_file_office}' dengan John...${r}"
 														john --wordlist="${nama_file_wordlist_office_john}" --pot="${pot_office_john}" "${target_hash_office_john}" > /dev/null 2>&1
@@ -1803,28 +1789,28 @@ while true; do
 
 			# memasukkan nama file office
 			while true; do
-				read -p $'\e[1;37mMasukkan nama file Office: \e[1;33m' nama_file_office
+				read -p $'\e[1;37mMasukkan nama file Office: \e[1;33m' nama_file_office_john
 
 				# kondisi jika nama file office kosong
-				if [[ -z "${nama_file_office}" ]]; then
+				if [[ -z "${nama_file_office_john}" ]]; then
 					echo -e "${m}[-] ${p}Nama file Office tidak boleh kosong.${r}"
 					continue
 				fi
 
 				# kondisi jika file office tidak ditemukan
-				if [[ ! -f "${nama_file_office}" ]]; then
-					echo -e "${m}[-] ${p}File Office '${nama_file_office}' tidak ditemukan.${r}"
+				if [[ ! -f "${nama_file_office_john}" ]]; then
+					echo -e "${m}[-] ${p}File Office '${nama_file_office_john}' tidak ditemukan.${r}"
 					continue
 				fi
 
 				# kondisi jika file bukan file office
-				if [[ "${nama_file_office##*.}" != "docx" && "${nama_file_office##*.}" != "xlsx" && "${nama_file_office##*.}" != "pptx" ]]; then
-					echo -e "${m}[-] ${p}File '${nama_file_office}' bukan file Office.${r}"
+				if [[ "${nama_file_office_john##*.}" != "docx" && "${nama_file_office_john##*.}" != "xlsx" && "${nama_file_office_john##*.}" != "pptx" ]]; then
+					echo -e "${m}[-] ${p}File '${nama_file_office_john}' bukan file Office.${r}"
 					continue
 				fi
 
 				# kondisi jika file office ditemukan
-				echo -e "${h}[+] ${p}File Office '${nama_file_office}' ditemukan.${r}"
+				echo -e "${h}[+] ${p}File Office '${nama_file_office_john}' ditemukan.${r}"
 				break
 			done
 
@@ -1852,12 +1838,12 @@ while true; do
 										continue
 									else
 										echo -e "${h}[+] ${p}File Wordlist '${nama_file_wordlist_office_john}' ditemukan.${r}"
+										pot_office_john="pot_office_john.txt"
 										while true; do
 											read -p $'\e[1;37mApakah Anda ingin menggunakan mode verbose (iya/tidak): \e[1;33m' nanya_verbose_office_john
 											if [[ "${nanya_verbose_office_john}" == "iya" ]]; then
-												pot_office_john="pot_office_john.txt"
 												read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
-												echo -e "${b}[*] ${p}Cracking kata sandi file Office '${nama_file_office}' dengan John...${r}"
+												echo -e "${b}[*] ${p}Cracking kata sandi file Office '${nama_file_office_john}' dengan John...${r}"
 												john --wordlist="${nama_file_wordlist_office_john}" --pot="${pot_office_john}" --verbosity=6 --progress-every=1 "${nama_file_hash_dari_file_office_john}"
 												if [[ -f "${pot_office_john}" ]]; then
 													if [[ $(cat "${pot_office_john}" | grep -o ":") ]]; then
@@ -1877,9 +1863,8 @@ while true; do
 												break
 
 											elif [[ "${nanya_verbose_office_john}" == "tidak" ]]; then
-												pot_office_john="pot_office_john.txt"
 												read -p $'\e[1;37mTekan [\e[1;32mEnter\e[1;37m] untuk memulai prosres cracking.\e[0m'
-												echo -e "${b}[*] ${p}Cracking kata sandi file Office '${nama_file_office}' dengan John...${r}"
+												echo -e "${b}[*] ${p}Cracking kata sandi file Office '${nama_file_office_john}' dengan John...${r}"
 												john --wordlist="${nama_file_wordlist_office_john}" --pot="${pot_office_john}" "${nama_file_hash_dari_file_office_john}" > /dev/null 2>&1
 												if [[ -f "${pot_office_john}" ]]; then
 													if [[ $(cat "${pot_office_john}" | grep -o ":") ]]; then
