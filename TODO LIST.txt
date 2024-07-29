@@ -1,1 +1,4 @@
+[DONE]
 - Menggunakan mode verbose
+[ ON PROGRESS ]
+- Menambah vitur Prince Attack pada John The Ripper 
